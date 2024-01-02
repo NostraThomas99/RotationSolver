@@ -170,6 +170,8 @@ internal static partial class TargetUpdater
         {
             if (Svc.ClientState == null) return false;
 
+            if (!CheckTargetableOther(b)) return false;
+
             IEnumerable<string> names = Array.Empty<string>();
             if (OtherConfiguration.NoHostileNames.TryGetValue(Svc.ClientState.TerritoryType, out var ns1))
                 names = names.Union(ns1);
@@ -520,5 +522,39 @@ internal static partial class TargetUpdater
             charas.Add(b.ObjectId);
         }
         DataCenter.TreasureCharas = charas.ToArray();
+    }
+
+    // status checks that can't easily be represented in config
+    private static bool CheckTargetableOther(BattleChara b) {
+        // Labyrinth of the Ancients
+        if (Svc.ClientState.TerritoryType == 174) {
+            // Thanatos
+            if (b.DataId == 2350) {
+                // can only be damaged by players with Astral Realignment
+                return Player.Status.Any(s => s.StatusId == 398);
+            }
+
+            // Allagan Bomb
+            if (b.DataId == 2407) {
+                // can only be damaged when every other enemy is dead
+                return DataCenter.NumberOfAllHostilesInMaxRange == 1;
+            }
+        }
+
+        // The Puppets' Bunker
+        if (Svc.ClientState.TerritoryType == 917) {
+            // second boss has one of three buffs corresponding to an alliance letter
+            // player needs the matching buff
+            var minibossBuff = b.StatusList.FirstOrDefault(x => x.StatusId is 2409 or 2410 or 2411);
+            if (minibossBuff != null) {
+                // 2288 -> 2409
+                // 2289 -> 2410
+                // 2290 -> 2411
+                var playerBuff = minibossBuff.StatusId - 121;
+                return Player.Status.Any(s => s.StatusId == playerBuff);
+            }
+        }
+
+        return true;
     }
 }
