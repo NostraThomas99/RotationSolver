@@ -55,6 +55,8 @@ internal static partial class TargetUpdater
             = DataCenter.AllianceMembers
             = DataCenter.AllianceTanks
             = DataCenter.DyingPeople
+            = DataCenter.HostileTargetsCastingAOE
+            = DataCenter.HostileTargetsCastingToTank
             = empty;
 
         DataCenter.DeathPeopleAll.Delay(empty);
@@ -155,8 +157,11 @@ internal static partial class TargetUpdater
         DataCenter.MobsTime = DataCenter.HostileTargets.Count(o => o.DistanceToPlayer() <= JobRange && o.CanSee())
             >= Service.Config.GetValue(PluginConfigInt.AutoDefenseNumber);
 
-        DataCenter.IsHostileCastingToTank = IsCastingTankVfx() || DataCenter.HostileTargets.Any(IsHostileCastingTank);
-        DataCenter.IsHostileCastingAOE = IsCastingAreaVfx() || DataCenter.HostileTargets.Any(IsHostileCastingArea);
+        DataCenter.HostileTargetsCastingToTank = DataCenter.HostileTargets.Where(IsHostileCastingTank);
+        DataCenter.HostileTargetsCastingAOE = DataCenter.HostileTargets.Where(IsHostileCastingArea);
+
+        DataCenter.IsHostileCastingToTank = IsCastingTankVfx() || DataCenter.HostileTargetsCastingToTank.Any();
+        DataCenter.IsHostileCastingAOE = IsCastingAreaVfx() || DataCenter.HostileTargetsCastingAOE.Any();
 
         DataCenter.CanProvoke = _provokeDelay.Delay(TargetFilter.ProvokeTarget(DataCenter.HostileTargets, true).Count() != DataCenter.HostileTargets.Count());
     }

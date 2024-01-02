@@ -296,6 +296,10 @@ internal static class DataCenter
     () => (Service.Config.GetValue(PluginConfigFloat.HostileDelayMin),
     Service.Config.GetValue(PluginConfigFloat.HostileDelayMax)));
 
+    public static IEnumerable<BattleChara> HostileTargetsCastingAOE { get; internal set; } = Array.Empty<BattleChara>();
+
+    public static IEnumerable<BattleChara> HostileTargetsCastingToTank { get; internal set; } = Array.Empty<BattleChara>();
+
     public static IEnumerable<BattleChara> AllHostileTargets { get; internal set; } = Array.Empty<BattleChara>();
 
     public static IEnumerable<BattleChara> TarOnMeTargets { get; internal set; } = Array.Empty<BattleChara>();
