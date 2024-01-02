@@ -35,6 +35,20 @@ jobs:
       - name: Build Project
         run: dotnet build --configuration Release RotationSolver/RotationSolver.csproj -p:AssemblyVersion=${{ env.tag }}
 
+      - name: Get Tag Name
+        run: |
+          tag=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
+          echo "tag=$tag" >> $GITHUB_ENV
+
+          if [[ "$tag" == *"-test" ]]; then
+            branch="testing"
+            tag=$(echo $tag | sed 's/-test//')
+          else
+            branch="latest"
+          fi
+
+          echo "branch=$branch" >> $GITHUB_ENV
+          echo "tag=$tag" >> $GITHUB_ENV
       - name: Publish Version
         uses: PunishXIV/dynamis-action@v1
         id: dynamis
@@ -43,7 +57,7 @@ jobs:
           internal_name: 'RotationSolver'
           version_number: ${{ env.tag }}
           path: 'RotationSolver/bin/Release/RotationSolver/latest.zip'
-          type: 'latest'
+          type: '${{ env.branch }}'
           dalamud_version: '9'
         env:
           PUBLISHER_KEY: ${{ secrets.PUBLISHER_KEY }}
