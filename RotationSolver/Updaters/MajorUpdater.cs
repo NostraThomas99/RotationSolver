@@ -32,6 +32,12 @@ internal static class MajorUpdater
 
     private unsafe static void FrameworkUpdate(IFramework framework)
     {
+        if (!_showedWarning)
+        {
+            _showedWarning = true;
+            ShowWarning();
+        }
+
         PainterManager.ActionIds.Clear();
         RotationSolverPlugin.UpdateDisplayWindow();
         if (!IsValid)
@@ -43,15 +49,8 @@ internal static class MajorUpdater
             return;
         }
 
-        if (!_showedWarning)
-        {
-            _showedWarning = true;
-            ShowWarning();
-        }
-
         try
         {
-            SocialUpdater.UpdateSocial();
             PreviewUpdater.UpdatePreview();
 
             if (Service.Config.GetValue(PluginConfigBool.TeachingMode) && ActionUpdater.NextAction != null)

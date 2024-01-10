@@ -104,17 +104,6 @@ internal static partial class TargetUpdater
         DataCenter.AllHostileTargets = allTargets.Where(b =>
         {
             if (b.StatusList.Any(StatusHelper.IsInvincible)) return false;
-
-            if (b is PlayerCharacter p)
-            {
-                var hash = SocialUpdater.EncryptString(p);
-
-                //Don't attack authors!!
-                if (RotationUpdater.AuthorHashes.ContainsKey(hash)) return false;
-
-                //Don't attack contributors!!
-                if (DownloadHelper.ContributorsHash.Contains(hash)) return false;
-            }
             return true;
         });
 

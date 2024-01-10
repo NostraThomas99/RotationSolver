@@ -59,9 +59,6 @@ internal static class ConfigTranslation
         PluginConfigBool.ToggleManual => LocalizationManager.RightLang.ConfigWindow_Param_ToggleManual,
         PluginConfigBool.ToggleAuto => LocalizationManager.RightLang.ConfigWindow_Param_ToggleAuto,
         PluginConfigBool.UseStopCasting => LocalizationManager.RightLang.ConfigWindow_Param_UseStopCasting,
-        PluginConfigBool.SayHelloToUsers => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToUsers,
-        PluginConfigBool.SayHelloToAll => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToAll,
-        PluginConfigBool.JustSayHelloOnce => LocalizationManager.RightLang.ConfigWindow_Basic_JustSayHelloOnce,
         PluginConfigBool.UseAdditionalConditions => LocalizationManager.RightLang.ConfigWindow_Basic_UseAdditionalConditions,
 
         // UI

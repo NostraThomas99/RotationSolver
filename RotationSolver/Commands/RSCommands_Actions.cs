@@ -50,26 +50,6 @@ public static partial class RSCommands
             ControlWindow.DidTime = DateTime.Now;
         }
 
-        if (nextAction is BaseAction act1 && act1.IsPvP && !act1.IsFriendly
-            && !act1.IsTargetArea
-            && act1.Target is PlayerCharacter p/* && p != Player.Object*/)
-        {
-            var hash = SocialUpdater.EncryptString(p);
-
-            //Don't attack authors and contributors!!
-            if (RotationUpdater.AuthorHashes.ContainsKey(hash)
-                || DownloadHelper.ContributorsHash.Contains(hash))
-            {
-                Svc.Chat.PrintError($"Please don't attack RS developers with RS by {act1}!");
-                return;
-            }
-        }
-
-#if DEBUG
-        //if (nextAction is BaseAction acti)
-        //    Svc.Log.Debug($"Will Do {acti}");
-#endif
-
         if (Service.Config.GetValue(PluginConfigBool.KeyBoardNoise))
         {
             PreviewUpdater.PulseActionBar(nextAction.AdjustedID);
