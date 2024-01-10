@@ -59,9 +59,6 @@ internal static class ConfigTranslation
         PluginConfigBool.ToggleManual => LocalizationManager.RightLang.ConfigWindow_Param_ToggleManual,
         PluginConfigBool.ToggleAuto => LocalizationManager.RightLang.ConfigWindow_Param_ToggleAuto,
         PluginConfigBool.UseStopCasting => LocalizationManager.RightLang.ConfigWindow_Param_UseStopCasting,
-        PluginConfigBool.SayHelloToUsers => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToUsers,
-        PluginConfigBool.SayHelloToAll => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToAll,
-        PluginConfigBool.JustSayHelloOnce => LocalizationManager.RightLang.ConfigWindow_Basic_JustSayHelloOnce,
         PluginConfigBool.UseAdditionalConditions => LocalizationManager.RightLang.ConfigWindow_Basic_UseAdditionalConditions,
 
         // UI
@@ -261,8 +258,6 @@ internal static class ConfigTranslation
         PluginConfigBool.CanAttackMarkAOE => LocalizationManager.RightLang.ConfigWindow_Param_AttackMarkAOEDesc,
         PluginConfigBool.MoveTowardsScreenCenter => LocalizationManager.RightLang.ConfigWindow_Param_MoveTowardsScreenDesc,
         PluginConfigBool.MoveAreaActionFarthest => LocalizationManager.RightLang.ConfigWindow_Param_MoveAreaActionFarthestDesc,
-
-        PluginConfigBool.SayHelloToUsers => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToUsersDesc,
 
         PluginConfigBool.AutoOpenChest => "Because of the feature in pandora, there is an issue the treasure chest cannot be opened in some cases, I find the code from roll for loot. Once Pandora fixed that, this feature will be deleted.",
         _ => string.Empty,

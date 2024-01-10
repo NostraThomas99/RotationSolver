@@ -766,7 +766,6 @@ internal class Strings
     public string ConfigWindow_Basic_ClickingDuration { get; set; } = "The clicking duration, RS will try to click at this moment.";
     public string ConfigWindow_Basic_WeaponDelay { get; set; } = "This is the clipping time.\nGCD is over. However, RS forgets to click the next action.";
     public string ConfigWindow_About_ClickingCount { get; set; } = "Rotation Solver helped you by clicking actions {0:N0} times.";
-    public string ConfigWindow_About_SayHelloCount { get; set; } = "You have said hello to other users {0:N0} times!";
     public string ConfigWindow_Auto_AutoHealTimeToKill { get; set; } = "Stop healing when time to kill is lower then...";
     public string ConfigWindow_UI_ShowHostiles { get; set; } = "Show the hostile target icon";
     public string ConfigWindow_UI_HostileIconHeight { get; set; } = "Hostile Icon height from position";
@@ -800,10 +799,6 @@ internal class Strings
     public string ConfigWindow_Auto_LostAssassinationTimeToKill { get; set; } = "Expected TTK required to use Lost Assassination on target";
 
     public string ConfigWindow_Auto_HealthForAutoDefense { get; set; } = "HP Ratio about defense single of Tanks";
-    public string ConfigWindow_Basic_SayHelloToUsers { get; set; } = "Say hello to the users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToAll { get; set; } = "Say hello to all users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToUsersDesc { get; set; } = "It can only be disabled for users, not authors and contributors.\nIf you want to be greeted by other users, please DM ArchiTed in Discord Server with your Hash!";
-    public string ConfigWindow_Basic_JustSayHelloOnce { get; set; } = "Just say hello once to the same user.";
 
     public string ConfigWindow_About_Clicking100k { get; set; } = "Well, you must be a lazy player!";
     public string ConfigWindow_About_Clicking500k { get; set; } = "You're tiring RS out, give it a break!";
