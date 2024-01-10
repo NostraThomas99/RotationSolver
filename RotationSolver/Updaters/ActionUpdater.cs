@@ -32,6 +32,7 @@ internal static class ActionUpdater
     {
         PlayerCharacter localPlayer = Player.Object;
         var customRotation = DataCenter.RightNowRotation;
+        if (!DataCenter.IsManual && !DataCenter.State) return;
 
         try
         {

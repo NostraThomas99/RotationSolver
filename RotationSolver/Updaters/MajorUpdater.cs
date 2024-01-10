@@ -1,9 +1,6 @@
 using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.ClientState.Objects.Enums;
-using Dalamud.Game.Text.SeStringHandling;
-using Dalamud.Game.Text.SeStringHandling.Payloads;
 using Dalamud.Plugin.Services;
-using Dalamud.Utility;
 using ECommons.DalamudServices;
 using ECommons.GameHelpers;
 using ECommons.ImGuiMethods;
@@ -112,32 +109,6 @@ internal static class MajorUpdater
 
     private static void ShowWarning()
     {
-        if ((int)Svc.ClientState.ClientLanguage == 4)
-        {
-            var warning = "Rotation Solver 未进行国服适配并不提供相关支持! 建议使用国服的插件，如：";
-            Svc.Toasts.ShowError(warning + "AE Assist 2.0！");
-
-            var seString = new SeString(new TextPayload(warning),
-                Svc.PluginInterface.AddChatLinkHandler(2, (id, str) =>
-                {
-                    if (id == 2)
-                    {
-                        Util.OpenLink("http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=EyT0BfZWCVq8v2yiMjSqcb4lEqYuaF_P&authKey=UJFoVZ3OljlBhSilXpeLKIIzofI4ZUjJfjuqCgr%2BiaT3Y6HmQFVbXZ5xBOlSv5yZ&noverify=0&group_code=552689154");
-                    }
-                }),
-                new UIForegroundPayload(31),
-                new TextPayload("AE Assist 2.0"),
-                UIForegroundPayload.UIForegroundOff,
-                RawPayload.LinkTerminator,
-                new TextPayload("！"));
-
-            Svc.Chat.Print(new Dalamud.Game.Text.XivChatEntry()
-            {
-                Message = seString,
-                Type = Dalamud.Game.Text.XivChatType.ErrorMessage,
-            });
-        }
-
         if (!Svc.PluginInterface.InstalledPlugins.Any(p => p.InternalName == "Avarice"))
         {
             LocalizationManager.RightLang.AvariceWarning.ShowWarning(0);
