@@ -144,8 +144,6 @@ internal static class MajorUpdater
 
         try
         {
-            TargetUpdater.UpdateTarget();
-
             if (Service.Config.GetValue(PluginConfigBool.AutoLoadCustomRotations))
             {
                 RotationUpdater.LocalRotationWatcher();
@@ -153,8 +151,12 @@ internal static class MajorUpdater
 
             RotationUpdater.UpdateRotation();
 
-            ActionSequencerUpdater.UpdateActionSequencerAction();
-            ActionUpdater.UpdateNextAction();
+            if (DataCenter.IsManual || DataCenter.State)
+            {
+                TargetUpdater.UpdateTarget();
+                ActionSequencerUpdater.UpdateActionSequencerAction();
+                ActionUpdater.UpdateNextAction();
+            }
 
             RSCommands.UpdateRotationState();
             PainterManager.UpdateSettings();

@@ -8,6 +8,7 @@ using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using FFXIVClientStructs.FFXIV.Client.UI;
 using FFXIVClientStructs.FFXIV.Client.UI.Misc;
 using RotationSolver.Commands;
+using System.Formats.Tar;
 
 namespace RotationSolver.Updaters;
 
@@ -41,6 +42,7 @@ internal static class PreviewUpdater
                 new IconPayload(BitmapFontIcon.DPS),
                 new TextPayload(showStr)
                 );
+            _dtrEntry.OnClick = RSCommands.IncrementState;
         }
         else if (_dtrEntry != null && _dtrEntry.Shown)
         {
