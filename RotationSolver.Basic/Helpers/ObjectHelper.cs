@@ -1,4 +1,5 @@
 ﻿using Dalamud.Game.ClientState.Objects.Enums;
+using ECommons.DalamudServices;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -66,9 +67,22 @@ public static class ObjectHelper
     /// <param name="obj"></param>
     /// <returns></returns>
     public static unsafe bool IsAlliance(this GameObject obj)
-        => obj != null
-        && (ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
-        || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct()));
+    {
+        try
+        {
+            if (obj == null)
+                return false;
+
+            return ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
+                || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct());
+        }
+        catch (Exception ex)
+        {
+            // Log or print the exception details for debugging
+            Svc.Log.Error($"Exception in {nameof(IsAlliance)}: {ex}");
+            throw; // Rethrow the exception to maintain the original exception flow
+        }
+    }
 
     /// <summary>
     /// Get the object kind.
