@@ -805,7 +805,6 @@ internal class Strings
 
     public string ConfigWindow_About_ThanksToSupporters { get; set; } = "Many thanks to the sponsors.";
     public string ConfigWindow_Rotations_Download { get; set; } = "Download Rotations";
-    public string ConfigWindow_Rotations_Links { get; set; } = "Links of the rotations online";
     public string ConfigWindow_Options_ForcedEnableCondition { get; set; } = "Use Forced Enable Condition";
     public string ConfigWindow_Options_ForcedEnableConditionDesc { get; set; } = "The conditions of forced to make it true.";
 

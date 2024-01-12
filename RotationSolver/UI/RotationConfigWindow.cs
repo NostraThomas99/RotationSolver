@@ -1534,16 +1534,6 @@ public partial class RotationConfigWindow : Window
             }
         }, width, textWidth);
 
-        text = LocalizationManager.RightLang.ConfigWindow_Rotations_Links;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink($"https://github.com/{Service.USERNAME}/{Service.REPO}/blob/main/RotationsLink.md");
-            }
-        }, width, textWidth);
-
         _rotationsHeader?.Draw();
     }
     private static readonly CollapsingHeaderGroup _rotationsHeader = new(new()

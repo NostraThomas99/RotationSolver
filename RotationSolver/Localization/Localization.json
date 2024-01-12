@@ -569,7 +569,6 @@
   "ConfigWindow_About_Clicking500k": "You're tiring RS out, give it a break!",
   "ConfigWindow_About_ThanksToSupporters": "Many thanks to the sponsors.",
   "ConfigWindow_Rotations_Download": "Download Rotations",
-  "ConfigWindow_Rotations_Links": "Links of the rotations online",
   "ConfigWindow_Options_ForcedEnableCondition": "Use Forced Enable Condition",
   "ConfigWindow_Options_ForcedEnableConditionDesc": "The conditions of forced to make it true.",
   "ConfigWindow_Options_ForcedDisableCondition": "Use Forced Disable Condition",
