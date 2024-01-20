@@ -71,7 +71,10 @@ public static class ObjectHelper
         try
         {
             if (obj == null)
+            {
+                Svc.Log.Debug($"{nameof(IsAlliance)}: GameObject is null.");
                 return false;
+            }
 
             return ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
                 || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct());

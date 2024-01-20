@@ -1,5 +1,6 @@
 ﻿using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.SubKinds;
+using ECommons;
 using ECommons.DalamudServices;
 using ECommons.ExcelServices;
 using ECommons.GameFunctions;
@@ -16,14 +17,22 @@ internal static partial class TargetUpdater
 {
     internal unsafe static void UpdateTarget()
     {
-        DataCenter.AllTargets = Svc.Objects.GetObjectInRadius(30);
-        var battles = DataCenter.AllTargets.OfType<BattleChara>();
-        UpdateHostileTargets(battles);
-        UpdateFriends(battles
-            .Where(b => b.Character()->CharacterData.OnlineStatus != 15 //Removed the one watching cutscene.
-            && b.IsTargetable //Removed the one can't target.
-            ));
-        UpdateNamePlate(Svc.Objects.OfType<BattleChara>());
+        try
+        {
+            DataCenter.AllTargets = Svc.Objects.GetObjectInRadius(30);
+            var battles = DataCenter.AllTargets.OfType<BattleChara>();
+            UpdateHostileTargets(battles);
+            UpdateFriends(battles
+                .Where(b => b.Character()->CharacterData.OnlineStatus != 15 //Removed the one watching cutscene.
+                && b.IsTargetable //Removed the one can't target.
+                ));
+            UpdateNamePlate(Svc.Objects.OfType<BattleChara>());
+        }
+        catch (Exception ex)
+        {
+            ex.Log($"Exception in {nameof(UpdateTarget)}");
+            // Rethrow the exception if necessary
+        }
     }
 
     private static DateTime _lastUpdateTimeToKill = DateTime.MinValue;
@@ -311,58 +320,67 @@ internal static partial class TargetUpdater
     private static uint _lastMp = 0;
     private unsafe static void UpdateFriends(IEnumerable<BattleChara> allTargets)
     {
-        DataCenter.PartyMembers = GetPartyMembers(allTargets);
-        DataCenter.AllianceMembers = allTargets.Where(ObjectHelper.IsAlliance);
-
-        var mayPet = allTargets.OfType<BattleNpc>().Where(npc => npc.OwnerId == Player.Object.ObjectId);
-        DataCenter.HasPet = mayPet.Any(npc => npc.BattleNpcKind == BattleNpcSubKind.Pet);
-        //DataCenter.HasPet = HasPet();
-
-        DataCenter.PartyTanks = DataCenter.PartyMembers.GetJobCategory(JobRole.Tank);
-        DataCenter.PartyHealers = DataCenter.PartyMembers.GetJobCategory(JobRole.Healer);
-        DataCenter.AllianceTanks = DataCenter.AllianceMembers.GetJobCategory(JobRole.Tank);
-
-        var deathAll = DataCenter.AllianceMembers.GetDeath();
-        var deathParty = DataCenter.PartyMembers.GetDeath();
-        MaintainDeathPeople(ref deathAll, ref deathParty);
-        DataCenter.DeathPeopleAll.Delay(deathAll);
-        DataCenter.DeathPeopleParty.Delay(deathParty);
-
-        DataCenter.WeakenPeople.Delay(DataCenter.PartyMembers.Where(p => p.StatusList.Any(StatusHelper.CanDispel)));
-        DataCenter.DyingPeople = DataCenter.WeakenPeople.Where(p => p.StatusList.Any(StatusHelper.IsDangerous));
-
-        DataCenter.RefinedHP = DataCenter.PartyMembers
-            .ToDictionary(p => p.ObjectId, GetPartyMemberHPRatio);
-        DataCenter.PartyMembersHP = DataCenter.RefinedHP.Values.Where(r => r > 0);
-
-        if (DataCenter.PartyMembersHP.Any())
+        try
         {
-            DataCenter.PartyMembersAverHP = DataCenter.PartyMembersHP.Average();
-            DataCenter.PartyMembersDifferHP = (float)Math.Sqrt(DataCenter.PartyMembersHP.Average(d => Math.Pow(d - DataCenter.PartyMembersAverHP, 2)));
-        }
-        else
-        {
-            DataCenter.PartyMembersAverHP = DataCenter.PartyMembersDifferHP = 0;
-        }
+            Svc.Log.Debug($"{nameof(UpdateFriends)}: Total targets count: {allTargets.Count()}");
+            DataCenter.PartyMembers = GetPartyMembers(allTargets);
+            DataCenter.AllianceMembers = allTargets?.Where(ObjectHelper.IsAlliance) ?? Enumerable.Empty<BattleChara>();
 
-        UpdateCanHeal(Player.Object);
+            var mayPet = allTargets.OfType<BattleNpc>().Where(npc => npc.OwnerId == Player.Object.ObjectId);
+            DataCenter.HasPet = mayPet.Any(npc => npc.BattleNpcKind == BattleNpcSubKind.Pet);
+            //DataCenter.HasPet = HasPet();
 
-        _lastHp = DataCenter.PartyMembers.ToDictionary(p => p.ObjectId, p => p.CurrentHp);
+            DataCenter.PartyTanks = DataCenter.PartyMembers.GetJobCategory(JobRole.Tank);
+            DataCenter.PartyHealers = DataCenter.PartyMembers.GetJobCategory(JobRole.Healer);
+            DataCenter.AllianceTanks = DataCenter.AllianceMembers.GetJobCategory(JobRole.Tank);
 
-        if (DataCenter.InEffectTime)
-        {
-            var rightMp = Player.Object.CurrentMp;
-            if (rightMp - _lastMp == DataCenter.MPGain)
+            var deathAll = DataCenter.AllianceMembers.GetDeath();
+            var deathParty = DataCenter.PartyMembers.GetDeath();
+            MaintainDeathPeople(ref deathAll, ref deathParty);
+            DataCenter.DeathPeopleAll.Delay(deathAll);
+            DataCenter.DeathPeopleParty.Delay(deathParty);
+
+            DataCenter.WeakenPeople.Delay(DataCenter.PartyMembers.Where(p => p.StatusList.Any(StatusHelper.CanDispel)));
+            DataCenter.DyingPeople = DataCenter.WeakenPeople.Where(p => p.StatusList.Any(StatusHelper.IsDangerous));
+
+            DataCenter.RefinedHP = DataCenter.PartyMembers
+                .ToDictionary(p => p.ObjectId, GetPartyMemberHPRatio);
+            DataCenter.PartyMembersHP = DataCenter.RefinedHP.Values.Where(r => r > 0);
+
+            if (DataCenter.PartyMembersHP.Any())
             {
-                DataCenter.MPGain = 0;
+                DataCenter.PartyMembersAverHP = DataCenter.PartyMembersHP.Average();
+                DataCenter.PartyMembersDifferHP = (float)Math.Sqrt(DataCenter.PartyMembersHP.Average(d => Math.Pow(d - DataCenter.PartyMembersAverHP, 2)));
             }
-            DataCenter.CurrentMp = Math.Min(10000, Player.Object.CurrentMp + DataCenter.MPGain);
+            else
+            {
+                DataCenter.PartyMembersAverHP = DataCenter.PartyMembersDifferHP = 0;
+            }
+
+            UpdateCanHeal(Player.Object);
+
+            _lastHp = DataCenter.PartyMembers.ToDictionary(p => p.ObjectId, p => p.CurrentHp);
+
+            if (DataCenter.InEffectTime)
+            {
+                var rightMp = Player.Object.CurrentMp;
+                if (rightMp - _lastMp == DataCenter.MPGain)
+                {
+                    DataCenter.MPGain = 0;
+                }
+                DataCenter.CurrentMp = Math.Min(10000, Player.Object.CurrentMp + DataCenter.MPGain);
+            }
+            else
+            {
+                DataCenter.CurrentMp = Player.Object.CurrentMp;
+            }
+            _lastMp = Player.Object.CurrentMp;
+            Svc.Log.Debug($"{nameof(UpdateFriends)}: Successful update");
         }
-        else
+        catch (Exception ex)
         {
-            DataCenter.CurrentMp = Player.Object.CurrentMp;
+            ex.Log($"Exception in {nameof(UpdateFriends)}");
         }
-        _lastMp = Player.Object.CurrentMp;
     }
 
     private static float GetPartyMemberHPRatio(BattleChara member)
