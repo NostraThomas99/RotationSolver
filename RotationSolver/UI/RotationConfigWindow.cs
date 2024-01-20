@@ -267,26 +267,6 @@ public partial class RotationConfigWindow : Window
                     }
                 }
             }
-
-            if (wholeWidth <= 60 * Scale
-                ? IconSet.GetTexture("https://storage.ko-fi.com/cdn/brandasset/kofi_s_logo_nolabel.png", out var texture)
-                : IconSet.GetTexture("https://storage.ko-fi.com/cdn/brandasset/kofi_bg_tag_dark.png", out texture))
-            {
-                var width = Math.Min(150 * Scale, Math.Max(Scale * MIN_COLUMN_WIDTH, Math.Min(wholeWidth, texture.Width)));
-                var size = new Vector2(width, width * texture.Height / texture.Width);
-                size *= MathF.Max(Scale * MIN_COLUMN_WIDTH / size.Y, 1);
-                var result = false;
-                ImGuiHelper.DrawItemMiddle(() =>
-                {
-                    ImGui.SetCursorPosY(ImGui.GetWindowSize().Y + ImGui.GetScrollY() - size.Y);
-                    result = ImGuiHelper.NoPaddingNoColorImageButton(texture.ImGuiHandle, size, "Donate Plugin");
-                }, wholeWidth, size.X);
-
-                if (result)
-                {
-                    Util.OpenLink("https://ko-fi.com/B0B0IN5DX");
-                }
-            }
         }
     }
 
