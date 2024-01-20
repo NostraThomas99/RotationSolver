@@ -185,7 +185,7 @@ public abstract class BLU_Base : CustomRotation
             act = null;
 
             if (!OnSlot) return false;
-            return base.CanUse(out act, option | CanUseOption.IgnoreClippingCheck, gcdCountForAbility);
+            return base.CanUse(out act, option | CanUseOption.IgnoreClippingCheck, aoeCount, gcdCountForAbility);
         }
     }
 
@@ -904,7 +904,7 @@ public abstract class BLU_Base : CustomRotation
     public static IBLUAction BasicInstinct { get; } = new BLUAction(ActionID.BasicInstinct)
     {
         StatusProvide = new StatusID[] { StatusID.BasicInstinct },
-        ActionCheck = (b, m) => Svc.Condition[Dalamud.Game.ClientState.Conditions.ConditionFlag.BoundByDuty56] && DataCenter.PartyMembers.Count(p => p.GetHealthRatio() > 0) == 1,
+        ActionCheck = (b, m) => DataCenter.InSoloDuty()
     };
 
     static IBaseAction AethericMimicry { get; } = new BaseAction(ActionID.AethericMimicry, ActionOption.Friendly)

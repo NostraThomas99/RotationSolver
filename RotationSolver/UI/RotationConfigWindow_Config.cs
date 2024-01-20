@@ -1,15 +1,11 @@
 ﻿using Dalamud.Game.ClientState.Keys;
 using Dalamud.Interface.Colors;
-using Dalamud.Utility;
-using ECommons.GameHelpers;
 using ECommons.ImGuiMethods;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Basic.Configuration.Conditions;
-using RotationSolver.Helpers;
 using RotationSolver.Localization;
 using RotationSolver.UI.SearchableConfigs;
 using RotationSolver.UI.SearchableSettings;
-using RotationSolver.Updaters;
 
 namespace RotationSolver.UI;
 
@@ -340,30 +336,6 @@ public partial class RotationConfigWindow
         {
             searchable?.Draw(Job);
         }
-
-        if (Service.Config.GetValue(PluginConfigBool.SayHelloToAll))
-        {
-            var str = SocialUpdater.EncryptString(Player.Object);
-            ImGui.SetNextItemWidth(ImGui.CalcTextSize(str).X + 10);
-            ImGui.InputText("That is your HASH:", ref str, 100);
-
-            if (!DownloadHelper.ContributorsHash.Contains(str)
-                && !DownloadHelper.UsersHash.Contains(str)
-                && !RotationUpdater.AuthorHashes.ContainsKey(str))
-            {
-                if (ImGui.Button("DM your Hash to ArchiTed for being greeted."))
-                {
-                    ImGui.SetClipboardText(str);
-                    Notify.Success($"Your hash \"{str}\" copied to clipboard.");
-                    Util.OpenLink("https://discord.com/users/1007293294100877322");
-                }
-            }
-        }
-        else
-        {
-            ImGui.TextColored(ImGuiColors.DalamudRed, "The author of RS loves being greeted by you!");
-        }
-
     }
 
     private static readonly ISearchable[] _basicTimer = new ISearchable[]
@@ -397,10 +369,6 @@ public partial class RotationConfigWindow
         new DragFloatRangeSearchPlugin(PluginConfigFloat.NotInCombatDelayMin, PluginConfigFloat.NotInCombatDelayMax, 0.002f),
 
         new CheckBoxSearchPlugin(PluginConfigBool.UseAdditionalConditions),
-
-        new CheckBoxSearchPlugin(PluginConfigBool.SayHelloToAll,
-            new CheckBoxSearchPlugin(PluginConfigBool.SayHelloToUsers),
-            new CheckBoxSearchPlugin(PluginConfigBool.JustSayHelloOnce)),
     };
 
     private static readonly ISearchable[] _basicSwitchTurnOn = new ISearchable[]
@@ -834,6 +802,13 @@ public partial class RotationConfigWindow
 
             new CheckBoxSearchPlugin(PluginConfigBool.AutoSpeedOutOfCombat),
         }),
+
+        new CheckBoxSearchPlugin(PluginConfigBool.UseLostActions, new ISearchable[] {
+            new CheckBoxSearchPlugin(PluginConfigBool.UseLostFlareStarOnMobs), 
+            new CheckBoxSearchPlugin(PluginConfigBool.UseLostAssassinationOnMobs,
+                new DragFloatSearchPlugin(PluginConfigFloat.LostAssassinationTimeToKill, 0.5f)),
+            new CheckBoxSearchPlugin(PluginConfigBool.LostReflectAutoRefresh)
+        }),
     };
     #endregion
 
@@ -883,6 +858,7 @@ public partial class RotationConfigWindow
             PvPFilter = JobFilter.NoJob,
         },
 
+        new CheckBoxSearchPlugin(PluginConfigBool.TargetAllSolo),
         new CheckBoxSearchPlugin(PluginConfigBool.AddEnemyListToHostile, new CheckBoxSearchPlugin(PluginConfigBool.OnlyAttackInEnemyList)),
         new CheckBoxSearchPlugin(PluginConfigBool.FilterStopMark),
         new CheckBoxSearchPlugin(PluginConfigBool.ChooseAttackMark, new ISearchable[]

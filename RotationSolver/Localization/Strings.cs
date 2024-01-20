@@ -220,6 +220,7 @@ internal class Strings
     public string ConfigWindow_Param_TargetToHostileType2 { get; set; } = "Previously engaged targets or all targets that are in range\n(engages on countdown timer and resets when out of combat)";
     public string ConfigWindow_Param_TargetToHostileType3 { get; set; } = "Previously engaged targets (engages on countdown timer)";
     public string ConfigWindow_Param_AddEnemyListToHostile { get; set; } = "Add enemy list to the hostile targets.";
+    public string ConfigWindow_Param_TargetAllSolo { get; set; } = "Force 'All targets' behavior while in solo duties.";
     public string ConfigWindow_Param_OnlyAttackInEnemyList { get; set; } = "Only attack the targets in enemy list.";
     public string ConfigWindow_Param_ChooseAttackMark { get; set; } = "Priority attack targets with attack markers";
     public string ConfigWindow_Param_CanAttackMarkAOE { get; set; } = "Allowed use of AoE to attack more mobs.";
@@ -765,7 +766,6 @@ internal class Strings
     public string ConfigWindow_Basic_ClickingDuration { get; set; } = "The clicking duration, RS will try to click at this moment.";
     public string ConfigWindow_Basic_WeaponDelay { get; set; } = "This is the clipping time.\nGCD is over. However, RS forgets to click the next action.";
     public string ConfigWindow_About_ClickingCount { get; set; } = "Rotation Solver helped you by clicking actions {0:N0} times.";
-    public string ConfigWindow_About_SayHelloCount { get; set; } = "You have said hello to other users {0:N0} times!";
     public string ConfigWindow_Auto_AutoHealTimeToKill { get; set; } = "Stop healing when time to kill is lower then...";
     public string ConfigWindow_UI_ShowHostiles { get; set; } = "Show the hostile target icon";
     public string ConfigWindow_UI_HostileIconHeight { get; set; } = "Hostile Icon height from position";
@@ -792,19 +792,19 @@ internal class Strings
 
     public string ConfigWindow_Auto_UseResourcesAction { get; set; } = "Use actions that use resources";
     public string ConfigWindow_Auto_OnlyHealSelfWhenNoHealer { get; set; } = "Only Heal self When Not a healer";
+    public string ConfigWindow_Auto_UseLostActions { get; set; } = "Use Lost Actions (Bozja)";
+    public string ConfigWindow_Auto_UseLostFlareStarOnMobs { get; set; } = "Use Lost Flare Star on non-boss targets";
+    public string ConfigWindow_Auto_UseLostAssassinationOnMobs { get; set; } = "Use Lost Assassination to kill non-boss targets";
+    public string ConfigWindow_Auto_LostReflectAutoRefresh { get; set; } = "Automatically refresh Lost Reflect before it expires";
+    public string ConfigWindow_Auto_LostAssassinationTimeToKill { get; set; } = "Expected TTK required to use Lost Assassination on target";
 
     public string ConfigWindow_Auto_HealthForAutoDefense { get; set; } = "HP Ratio about defense single of Tanks";
-    public string ConfigWindow_Basic_SayHelloToUsers { get; set; } = "Say hello to the users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToAll { get; set; } = "Say hello to all users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToUsersDesc { get; set; } = "It can only be disabled for users, not authors and contributors.\nIf you want to be greeted by other users, please DM ArchiTed in Discord Server with your Hash!";
-    public string ConfigWindow_Basic_JustSayHelloOnce { get; set; } = "Just say hello once to the same user.";
 
     public string ConfigWindow_About_Clicking100k { get; set; } = "Well, you must be a lazy player!";
     public string ConfigWindow_About_Clicking500k { get; set; } = "You're tiring RS out, give it a break!";
 
     public string ConfigWindow_About_ThanksToSupporters { get; set; } = "Many thanks to the sponsors.";
     public string ConfigWindow_Rotations_Download { get; set; } = "Download Rotations";
-    public string ConfigWindow_Rotations_Links { get; set; } = "Links of the rotations online";
     public string ConfigWindow_Options_ForcedEnableCondition { get; set; } = "Use Forced Enable Condition";
     public string ConfigWindow_Options_ForcedEnableConditionDesc { get; set; } = "The conditions of forced to make it true.";
 

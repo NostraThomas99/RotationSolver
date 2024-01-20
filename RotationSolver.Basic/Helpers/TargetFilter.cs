@@ -1,4 +1,5 @@
 ﻿using ECommons.DalamudServices;
+using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using Lumina.Excel.GeneratedSheets;
 using RotationSolver.Basic.Configuration;
@@ -256,7 +257,11 @@ public static class TargetFilter
     /// <returns></returns>
     public unsafe static IEnumerable<BattleChara> GetDeath(this IEnumerable<BattleChara> charas) => charas.Where(item =>
         {
-            if (item == null) return false;
+            if (item == null || item.Character() == null)
+            {
+                Svc.Log.Warning($"{nameof(GetDeath)}: Invalid BattleChara or Character.");
+                return false;
+            }
             if (!item.IsDead) return false;
             if (item.CurrentHp != 0) return false;
 
@@ -266,6 +271,7 @@ public static class TargetFilter
 
             if (!Service.Config.GetValue(PluginConfigBool.RaiseBrinkOfDeath) && item.HasStatus(false, StatusID.BrinkOfDeath)) return false;
 
+            if (DataCenter.AllianceMembers == null) return false;
             if (DataCenter.AllianceMembers.Any(c => c.CastTargetObjectId == item.ObjectId)) return false;
 
             return true;

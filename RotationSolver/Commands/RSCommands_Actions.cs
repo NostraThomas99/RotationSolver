@@ -1,9 +1,7 @@
 ﻿using Dalamud.Game.ClientState.Conditions;
-using Dalamud.Game.ClientState.Objects.SubKinds;
 using ECommons.DalamudServices;
 using ECommons.GameHelpers;
 using RotationSolver.Basic.Configuration;
-using RotationSolver.Helpers;
 using RotationSolver.Localization;
 using RotationSolver.UI;
 using RotationSolver.Updaters;
@@ -49,26 +47,6 @@ public static partial class RSCommands
             ControlWindow.Wrong = nextAction;
             ControlWindow.DidTime = DateTime.Now;
         }
-
-        if (nextAction is BaseAction act1 && act1.IsPvP && !act1.IsFriendly
-            && !act1.IsTargetArea
-            && act1.Target is PlayerCharacter p/* && p != Player.Object*/)
-        {
-            var hash = SocialUpdater.EncryptString(p);
-
-            //Don't attack authors and contributors!!
-            if (RotationUpdater.AuthorHashes.ContainsKey(hash)
-                || DownloadHelper.ContributorsHash.Contains(hash))
-            {
-                Svc.Chat.PrintError($"Please don't attack RS developers with RS by {act1}!");
-                return;
-            }
-        }
-
-#if DEBUG
-        //if (nextAction is BaseAction acti)
-        //    Svc.Log.Debug($"Will Do {acti}");
-#endif
 
         if (Service.Config.GetValue(PluginConfigBool.KeyBoardNoise))
         {
@@ -145,6 +123,14 @@ public static partial class RSCommands
     internal static void CancelState()
     {
         if (DataCenter.State) DoStateCommandType(StateCommandType.Cancel);
+    }
+
+    public static void IncrementState()
+    {
+        if (!DataCenter.State) { DoStateCommandType(StateCommandType.Auto); return; }
+        if (DataCenter.State && !DataCenter.IsManual && DataCenter.TargetingType == TargetingType.Big) { DoStateCommandType(StateCommandType.Auto); return; }
+        if (DataCenter.State && !DataCenter.IsManual) { DoStateCommandType(StateCommandType.Manual); return; }
+        if (DataCenter.State && DataCenter.IsManual) { DoStateCommandType(StateCommandType.Cancel); return; }
     }
 
     static float _lastCountdownTime = 0;

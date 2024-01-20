@@ -13,7 +13,6 @@ using ExCSS;
 using FFXIVClientStructs.FFXIV.Client.Game.Fate;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using Lumina.Excel.GeneratedSheets;
-using Newtonsoft.Json.Linq;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Data;
 using RotationSolver.Helpers;
@@ -627,18 +626,6 @@ public partial class RotationConfigWindow : Window
             }
         }
 
-        var sayHelloCount = OtherConfiguration.RotationSolverRecord.SayingHelloCount;
-        if (sayHelloCount > 0)
-        {
-            using var color = ImRaii.PushColor(ImGuiCol.Text, new Vector4(0.2f, 0.8f, 0.95f, 1));
-            var countStr = string.Format(LocalizationManager.RightLang.ConfigWindow_About_SayHelloCount, sayHelloCount);
-
-            ImGuiHelper.DrawItemMiddle(() =>
-            {
-                ImGui.TextWrapped(countStr);
-            }, width, ImGui.CalcTextSize(countStr).X);
-        }
-
         _aboutHeaders.Draw();
     }
 
@@ -795,19 +782,8 @@ public partial class RotationConfigWindow : Window
             Util.OpenLink("https://crowdin.com/project/rotationsolver");
         }
 
-        var text = "My story about FFXIV and Rotation Solver\n - ArchiTed / Youtube";
+        var text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
         var textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink("https://www.youtube.com/watch?v=Adigd5uqDx4");
-            }
-        }, width, textWidth);
-
-
-        text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
         ImGuiHelper.DrawItemMiddle(() =>
         {
             if (ImGui.Button(text))
@@ -1524,16 +1500,6 @@ public partial class RotationConfigWindow : Window
                 {
                     await RotationUpdater.GetAllCustomRotationsAsync(DownloadOption.MustDownload | DownloadOption.ShowList);
                 });
-            }
-        }, width, textWidth);
-
-        text = LocalizationManager.RightLang.ConfigWindow_Rotations_Links;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink($"https://github.com/{Service.USERNAME}/{Service.REPO}/blob/main/RotationsLink.md");
             }
         }, width, textWidth);
 

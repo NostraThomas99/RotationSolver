@@ -17,7 +17,19 @@ jobs:
           submodules: true
 
       - name: Get Tag Name
-        run: echo "tag=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_ENV
+        run: |
+          tag=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
+          echo "tag=$tag" >> $GITHUB_ENV
+
+          if [[ "$tag" == *"-test" ]]; then
+            branch="testing"
+            tag=$(echo $tag | sed 's/-test//')
+          else
+            branch="latest"
+          fi
+
+          echo "branch=$branch" >> $GITHUB_ENV
+          echo "tag=$tag" >> $GITHUB_ENV
 
       - name: Set up .NET
         uses: actions/setup-dotnet@v3
@@ -35,20 +47,6 @@ jobs:
       - name: Build Project
         run: dotnet build --configuration Release RotationSolver/RotationSolver.csproj -p:AssemblyVersion=${{ env.tag }}
 
-      - name: Get Tag Name
-        run: |
-          tag=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
-          echo "tag=$tag" >> $GITHUB_ENV
-
-          if [[ "$tag" == *"-test" ]]; then
-            branch="testing"
-            tag=$(echo $tag | sed 's/-test//')
-          else
-            branch="latest"
-          fi
-
-          echo "branch=$branch" >> $GITHUB_ENV
-          echo "tag=$tag" >> $GITHUB_ENV
       - name: Publish Version
         uses: PunishXIV/dynamis-action@v1
         id: dynamis
