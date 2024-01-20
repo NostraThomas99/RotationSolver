@@ -13,14 +13,14 @@ public static class DownloadHelper
 
     public static async Task DownloadAsync()
     {
-        LinkLibraries = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/downloadList.json") ?? Array.Empty<string>();
-        IncompatiblePlugins = await DownloadOneAsync<IncompatiblePlugin[]>($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/IncompatiblePlugins.json") ?? Array.Empty<IncompatiblePlugin>();
+        LinkLibraries = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/Jaksuhn/RotationSolver//main/Resources/downloadList.json") ?? Array.Empty<string>();
+        IncompatiblePlugins = await DownloadOneAsync<IncompatiblePlugin[]>($"https://raw.githubusercontent.com/Jaksuhn/RotationSolver/main/Resources/IncompatiblePlugins.json") ?? Array.Empty<IncompatiblePlugin>();
 
-        ContributorsHash = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/ContributorsHash.json") ?? Array.Empty<string>();
+        ContributorsHash = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/Jaksuhn/RotationSolver//main/Resources/ContributorsHash.json") ?? Array.Empty<string>();
 
-        UsersHash = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/UsersHash.json") ?? Array.Empty<string>();
+        UsersHash = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/Jaksuhn/RotationSolver/main/Resources/UsersHash.json") ?? Array.Empty<string>();
 
-        Supporters = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/Supporters.json") ?? Array.Empty<string>();
+        Supporters = await DownloadOneAsync<string[]>($"https://raw.githubusercontent.com/Jaksuhn/RotationSolver/main/Resources/Supporters.json") ?? Array.Empty<string>();
     }
 
     private static async Task<T> DownloadOneAsync<T>(string url)
