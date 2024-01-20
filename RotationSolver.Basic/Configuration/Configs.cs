@@ -265,15 +265,15 @@ public enum PluginConfigBool : byte
     [Default(true)] AutoOffWhenDutyCompleted,
     [Default(true)] ChangeTargetForFate,
     [Default(true)] MoveTowardsScreenCenter,
-    [Default(true)] SayOutStateChanged,
+    [Default(false)] SayOutStateChanged,
     [Default(true)] ShowInfoOnDtr,
     [Default(false)] HealOutOfCombat,
-    [Default(true)] ShowInfoOnToast,
+    [Default(false)] ShowInfoOnToast,
     [Default(false)] RaiseAll,
 
     [Default(false)] PoslockCasting,
     [Default(false)] PosPassageOfArms,
-    [Default(true)] PosTenChiJin,
+    [Default(false)] PosTenChiJin,
     [Default(false)] PosFlameThrower,
     [Default(false)] PosImprovisation,
 
@@ -289,14 +289,14 @@ public enum PluginConfigBool : byte
 
     [Default(true)] ShowMoveTarget,
     [Default(false)] ShowTargetTimeToKill,
-    [Default(true)] ShowTarget,
+    [Default(false)] ShowTarget,
     [Default(true)] ChooseAttackMark,
     [Default(true)] CanAttackMarkAOE,
     [Default(true)] FilterStopMark,
-    [Default(true)] ShowHostilesIcons,
+    [Default(false)] ShowHostilesIcons,
 
-    [Default(true)] TeachingMode,
-    [Default(true)] UseOverlayWindow,
+    [Default(false)] TeachingMode,
+    [Default(false)] UseOverlayWindow,
     [Default(true)] KeyBoardNoise,
 
     [Default(true)] MoveAreaActionFarthest,
@@ -323,10 +323,10 @@ public enum PluginConfigBool : byte
 
     [Default(false)] ToggleManual,
     [Default(false)] ToggleAuto,
-    [Default(true)] OnlyShowWithHostileOrInDuty,
+    [Default(false)] OnlyShowWithHostileOrInDuty,
     [Default(false)] ShowControlWindow,
     [Default(false)] IsControlWindowLock,
-    [Default(true)] ShowNextActionWindow,
+    [Default(false)] ShowNextActionWindow,
     [Default(false)] IsInfoWindowNoInputs,
     [Default(false)] IsInfoWindowNoMove,
     [Default(false)] ShowItemsCooldown,
@@ -339,7 +339,7 @@ public enum PluginConfigBool : byte
     [Default(true)] TargetFatePriority,
     [Default(true)] TargetHuntingRelicLevePriority,
     [Default(true)] TargetQuestPriority,
-    [Default(true)] ShowToastsAboutDoAction,
+    [Default(false)] ShowToastsAboutDoAction,
 
     [Default(true)] UseAOEAction,
     [Default(false)] UseAOEWhenManual,
@@ -369,7 +369,7 @@ public enum PluginConfigBool : byte
     [Default(true)] AutoCloseChestWindow,
 
     [Default(true)] ShowStateIcon,
-    [Default(true)] ShowBeneficialPositions,
+    [Default(false)] ShowBeneficialPositions,
     [Default(false)] HideWarning,
 
     [Default(true)] HealWhenNothingTodo,
