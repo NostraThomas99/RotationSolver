@@ -802,19 +802,8 @@ public partial class RotationConfigWindow : Window
             Util.OpenLink("https://crowdin.com/project/rotationsolver");
         }
 
-        var text = "My story about FFXIV and Rotation Solver\n - ArchiTed / Youtube";
+        var text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
         var textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink("https://www.youtube.com/watch?v=Adigd5uqDx4");
-            }
-        }, width, textWidth);
-
-
-        text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
         ImGuiHelper.DrawItemMiddle(() =>
         {
             if (ImGui.Button(text))
