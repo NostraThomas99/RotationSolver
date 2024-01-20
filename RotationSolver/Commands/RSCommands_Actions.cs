@@ -37,16 +37,8 @@ public static partial class RSCommands
     internal static uint _lastActionID;
     public static void DoAction()
     {
-        var wrong = new Random().NextDouble() < Service.Config.GetValue(PluginConfigFloat.MistakeRatio) && ActionUpdater.WrongAction != null;
-        var nextAction = wrong ? ActionUpdater.WrongAction : ActionUpdater.NextAction;
+        var nextAction = ActionUpdater.NextAction;
         if (nextAction == null) return;
-
-        if (wrong)
-        {
-            Svc.Toasts.ShowError(string.Format(LocalizationManager.RightLang.ClickingMistakeMessage, nextAction));
-            ControlWindow.Wrong = nextAction;
-            ControlWindow.DidTime = DateTime.Now;
-        }
 
         if (Service.Config.GetValue(PluginConfigBool.KeyBoardNoise))
         {

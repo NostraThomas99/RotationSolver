@@ -1414,16 +1414,6 @@ public partial class RotationConfigWindow : Window
 
                 if (_activeAction is IBaseAction action)
                 {
-                    if (Service.Config.GetValue(PluginConfigFloat.MistakeRatio) > 0
-                        && !action.IsFriendly && action.ChoiceTarget != TargetFilter.FindTargetForMoving)
-                    {
-                        enable = action.IsInMistake;
-                        if (ImGui.Checkbox($"{LocalizationManager.RightLang.ConfigWindow_Actions_IsInMistake}##{action.Name}InMistake", ref enable))
-                        {
-                            action.IsInMistake = enable;
-                        }
-                    }
-                    
                     ImGui.Separator();
 
                     var ttk = action.TimeToKill;

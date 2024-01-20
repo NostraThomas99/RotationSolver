@@ -153,23 +153,6 @@ public partial class BaseAction : IBaseAction
         }
     }
 
-    /// <inheritdoc/>
-    public bool IsInMistake
-    {
-        get => !Service.Config.GlobalConfig.NotInMistakeActions.Contains(ID);
-        set
-        {
-            if (value)
-            {
-                Service.Config.GlobalConfig.NotInMistakeActions.Remove(ID);
-            }
-            else
-            {
-                Service.Config.GlobalConfig.NotInMistakeActions.Add(ID);
-            }
-        }
-    }
-
     /// <summary>
     /// Action ID.
     /// </summary>

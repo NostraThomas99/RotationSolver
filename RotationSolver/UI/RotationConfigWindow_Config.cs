@@ -364,8 +364,6 @@ public partial class RotationConfigWindow
 
         new CheckBoxSearchPlugin(PluginConfigBool.UseWorkTask),
 
-        new DragFloatSearchPlugin(PluginConfigFloat.MistakeRatio, 0.002f),
-
         new DragFloatRangeSearchPlugin(PluginConfigFloat.NotInCombatDelayMin, PluginConfigFloat.NotInCombatDelayMax, 0.002f),
 
         new CheckBoxSearchPlugin(PluginConfigBool.UseAdditionalConditions),

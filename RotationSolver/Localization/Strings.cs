@@ -117,7 +117,6 @@ internal class Strings
 
     public string ConfigWindow_Param_ClickingDelay { get; set; } = "The range of random delay for clicking actions.";
     public string ConfigWindow_Param_StopCastingDelay { get; set; } = "The range of random delay for stopping casting when the target is dead or immune to damage.";
-    public string ConfigWindow_Param_ClickMistake { get; set; } = "How likely is it that RS will click the wrong action.";
     public string ConfigWindow_Param_PoslockCasting { get; set; } = "Lock the movement when casting or when doing some actions.";
     public string ConfigWindow_Param_UseStopCasting { get; set; } = "Stops casting when the target is dead.";
     public string ConfigWindow_Param_ShowTooltips { get; set; } = "Show tooltips";
@@ -651,8 +650,6 @@ internal class Strings
     public string TextToTalkWarning { get; set; } = "TextToTalk addon was not detected, please install it to make Rotation Solver give audio notifications!";
     public string AvariceWarning { get; set; } = "Avarice addon was not detected, please install it if you want to get the positional indicators for Rotation Solver!";
 
-    public string ClickingMistakeMessage { get; set; } = "OOOps! RS clicked the wrong action ({0})!";
-
     public string ConfigWindow_About_Punchline { get; set; } = "Analyses PvE combat information every frame and finds the best action.";
     public string ConfigWindow_About_Description { get; set; } = "This means almost all the information available in one frame in combat, including the status of all players in the party, the status of any hostile targets, skill cooldowns, the MP and HP of characters, the location of characters, casting status of the hostile target, combo, combat duration, player level, etc.\n\nThen, it will highlight the best action on the hot bar, or help you to click on it.";
 
@@ -685,7 +682,6 @@ internal class Strings
     public string ConfigWindow_Actions_DisabledConditionSet { get; set; } = "Disabled Condition";
     public string ConfigWindow_Actions_DisabledConditionSet_Description { get; set; } = "Conditions for automatic use of action being disabled.";
     public string ConfigWindow_Actions_ShowOnCDWindow { get; set; } = "Show on CD window";
-    public string ConfigWindow_Actions_IsInMistake { get; set; } = "Can be used by mistake";
 
     public string ConfigWindow_Configs_JobConfigTip { get; set; } = "This config is job specific";
 

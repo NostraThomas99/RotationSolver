@@ -5,10 +5,6 @@
 /// </summary>
 public interface IBaseAction : IAction
 {
-    /// <summary>
-    /// Is in the mistake actions.
-    /// </summary>
-    bool IsInMistake { get; set; }
 
     /// <summary>
     /// Attack Type

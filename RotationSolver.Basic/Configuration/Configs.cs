@@ -229,7 +229,6 @@ public class GlobalConfig
     public SortedSet<Job> DisabledJobs { get; private set; } = new();
     public SortedSet<uint> DisabledActions { get; private set; } = new();
     public SortedSet<uint> NotInCoolDownActions { get; private set; } = new();
-    public SortedSet<uint> NotInMistakeActions { get; private set; } = new();
     public SortedSet<uint> DisabledItems { get; private set; } = new();
     public SortedSet<uint> NotInCoolDownItems { get; private set; } = new();
     public List<ActionEventInfo> Events { get; private set; } = new();
@@ -260,8 +259,8 @@ public enum PluginConfigInt : byte
 public enum PluginConfigBool : byte
 {
     [Default(true)] DrawIconAnimation,
-    [Default(true)] AutoOffBetweenArea,
-    [Default(true)] AutoOffCutScene,
+    [Default(false)] AutoOffBetweenArea,
+    [Default(false)] AutoOffCutScene,
     [Default(true)] AutoOffWhenDead,
     [Default(true)] AutoOffWhenDutyCompleted,
     [Default(true)] ChangeTargetForFate,
@@ -396,8 +395,6 @@ public enum PluginConfigFloat : byte
     [Default(0.1f, 0f, 0.4f), Unit(ConfigUnitType.Seconds)] MinLastAbilityAdvanced,
     [Default(0.8f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealWhenNothingTodoBelow,
     [Default(0.6f, 0f, 1f), Unit(ConfigUnitType.Pixels)] TargetIconSize,
-
-    [Default(0f, 0f, 1f), Unit(ConfigUnitType.Percent)] MistakeRatio,
 
     [Default(0.4f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealthTankRatio,
     [Default(0.4f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealthHealerRatio,
