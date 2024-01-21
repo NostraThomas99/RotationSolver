@@ -276,6 +276,8 @@ internal static class DataCenter
 
     public static bool IsManual { get; set; } = false;
 
+    public static bool IsActivated() => State || IsManual || Service.Config.GetValue(PluginConfigBool.TeachingMode);
+
     public static void SetSpecialType(SpecialCommandType specialType)
     {
         _specialType = specialType;

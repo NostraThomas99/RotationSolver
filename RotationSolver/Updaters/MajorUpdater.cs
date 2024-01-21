@@ -57,7 +57,7 @@ internal static class MajorUpdater
                 PainterManager.ActionIds.Add(id == (uint)ActionID.Sprint ? 4 : id);
             }
 
-            if (DataCenter.IsManual || DataCenter.State)
+            if (DataCenter.IsActivated())
             {
                 ActionUpdater.UpdateActionInfo();
 
@@ -151,7 +151,7 @@ internal static class MajorUpdater
 
             RotationUpdater.UpdateRotation();
 
-            if (DataCenter.IsManual || DataCenter.State)
+            if (DataCenter.IsActivated())
             {
                 TargetUpdater.UpdateTarget();
                 ActionSequencerUpdater.UpdateActionSequencerAction();

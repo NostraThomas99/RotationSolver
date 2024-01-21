@@ -31,7 +31,6 @@ internal static partial class TargetUpdater
         catch (Exception ex)
         {
             ex.Log($"Exception in {nameof(UpdateTarget)}");
-            // Rethrow the exception if necessary
         }
     }
 
