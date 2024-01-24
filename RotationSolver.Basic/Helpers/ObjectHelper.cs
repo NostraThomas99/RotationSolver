@@ -81,9 +81,8 @@ public static class ObjectHelper
         }
         catch (Exception ex)
         {
-            // Log or print the exception details for debugging
             Svc.Log.Error($"Exception in {nameof(IsAlliance)}: {ex}");
-            throw; // Rethrow the exception to maintain the original exception flow
+            return false;
         }
     }
 

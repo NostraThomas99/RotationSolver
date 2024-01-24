@@ -176,11 +176,12 @@ public static class StatusHelper
         try
         {
             if (obj == null) return Array.Empty<Status>();
-            if (obj.StatusList == null) return Array.Empty<Status>();
+            if (obj.StatusList == null || obj.StatusList.Length == 0) return Array.Empty<Status>();
 
-            return obj.StatusList.Where(status => !isFromSelf
+            return obj?.StatusList?.Where(status => !isFromSelf
                                                   || status.SourceId == Player.Object.ObjectId
-                                                  || status.SourceObject?.OwnerId == Player.Object.ObjectId);
+                                                  || status.SourceObject?.OwnerId == Player.Object.ObjectId)
+                ?? Array.Empty<Status>();
         }
         catch (Exception ex)
         {
