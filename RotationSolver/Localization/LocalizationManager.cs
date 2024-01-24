@@ -26,7 +26,7 @@ internal class LocalizationManager : IDisposable
         {
             try
             {
-                var url = $"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/RotationSolver/Localization/{lang}.json";
+                var url = $"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/{Service.BRANCH}/RotationSolver/Localization/{lang}.json";
                 using var client = new HttpClient();
                 RightLang = _translations[lang] = JsonConvert.DeserializeObject<Strings>(await client.GetStringAsync(url));
             }
