@@ -1774,7 +1774,7 @@ public partial class RotationConfigWindow : Window
     private static readonly CollapsingHeaderGroup _idsHeader = new(new()
     {
         { () => LocalizationManager.RightLang.ConfigWindow_List_Statuses, DrawListStatuses},
-        { () => Service.Config.GetValue(PluginConfigBool.UseDefenseAbility) ? LocalizationManager.RightLang.ConfigWindow_List_Actions : string.Empty, DrawListActions},
+        { () => LocalizationManager.RightLang.ConfigWindow_List_Actions, DrawListActions},
         { () => LocalizationManager.RightLang.ConfigWindow_List_Territories, DrawListTerritories},
     });
     private static void DrawListStatuses()
