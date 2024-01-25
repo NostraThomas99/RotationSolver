@@ -5278,5 +5278,14 @@ public enum ActionID : uint
     /// </summary>
     LostSeraphStrike = 22354,
 
+    #endregion    #endregion
+
+    #region Duty Actions
+
+    /// <summary>
+    /// 
+    /// </summary>
+    Vril = 8517, /// ReAction also listing 9345, but that might be for normal mode, found 8517 doing Extreme through RS debug
+
     #endregion
 }
