@@ -2179,14 +2179,5 @@ public enum StatusID : ushort
 
     #endregion WHM_PvP
 
-    #region Duty_Action
-
-    /// <summary>
-    ///
-    /// </summary>
-    Vril = 1290,
-
-    #endregion Duty_Action
-
     #endregion
 }
