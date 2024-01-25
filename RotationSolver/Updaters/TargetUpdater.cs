@@ -321,7 +321,7 @@ internal static partial class TargetUpdater
     {
         try
         {
-            Svc.Log.Debug($"{nameof(UpdateFriends)}: Total targets count: {allTargets.Count()}");
+            Svc.Log.Verbose($"{nameof(UpdateFriends)}: Total targets count: {allTargets.Count()}");
             DataCenter.PartyMembers = GetPartyMembers(allTargets);
             DataCenter.AllianceMembers = allTargets?.Where(ObjectHelper.IsAlliance) ?? Enumerable.Empty<BattleChara>();
 
@@ -374,7 +374,7 @@ internal static partial class TargetUpdater
                 DataCenter.CurrentMp = Player.Object.CurrentMp;
             }
             _lastMp = Player.Object.CurrentMp;
-            Svc.Log.Debug($"{nameof(UpdateFriends)}: Successful update");
+            Svc.Log.Verbose($"{nameof(UpdateFriends)}: Successful update");
         }
         catch (Exception ex)
         {
