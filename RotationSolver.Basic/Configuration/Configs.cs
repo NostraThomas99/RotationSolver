@@ -245,7 +245,6 @@ public class GlobalConfig
 public enum PluginConfigInt : byte
 {
     [Default(0)] ActionSequencerIndex,
-    [Default(0)] PoslockModifier,
     [Default(0, 0, 10000)] LessMPNoRaise,
 
     [Default(2, 0, 5)] KeyBoardNoiseMin,
@@ -270,12 +269,6 @@ public enum PluginConfigBool : byte
     [Default(false)] HealOutOfCombat,
     [Default(false)] ShowInfoOnToast,
     [Default(false)] RaiseAll,
-
-    [Default(false)] PoslockCasting,
-    [Default(false)] PosPassageOfArms,
-    [Default(false)] PosTenChiJin,
-    [Default(false)] PosFlameThrower,
-    [Default(false)] PosImprovisation,
 
     [Default(true)] RaisePlayerByCasting,
     [Default(true)] RaiseBrinkOfDeath,

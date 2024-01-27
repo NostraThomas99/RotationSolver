@@ -969,25 +969,6 @@ public partial class RotationConfigWindow
 
     private static readonly ISearchable[] _extraSearchable = new ISearchable[]
     {
-        new CheckBoxSearchPlugin(PluginConfigBool.PoslockCasting,
-        new DragIntSearchPlugin(PluginConfigInt.PoslockModifier, () => new string[]{ "CTRL", "SHIFT", "ALT" }),
-        new CheckBoxSearchPlugin(PluginConfigBool.PosPassageOfArms)
-        {
-            Action = ActionID.PassageOfArms
-        },
-        new CheckBoxSearchPlugin(PluginConfigBool.PosTenChiJin)
-        {
-            Action = ActionID.TenChiJin
-        },
-        new CheckBoxSearchPlugin(PluginConfigBool.PosFlameThrower)
-        {
-            Action = ActionID.FlameThrower
-        },
-        new CheckBoxSearchPlugin(PluginConfigBool.PosImprovisation)
-        {
-            Action = ActionID.Improvisation
-        }),
-
         new CheckBoxSearchPlugin(PluginConfigBool.UseStopCasting,new ISearchable[]
         {
             new DragFloatRangeSearchPlugin(PluginConfigFloat.StopCastingDelayMin, PluginConfigFloat.StopCastingDelayMax, 0.002f)

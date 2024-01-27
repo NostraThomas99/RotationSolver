@@ -37,7 +37,6 @@ internal static class ConfigTranslation
 
     public static string ToName(this PluginConfigInt config) => config switch
     {
-        PluginConfigInt.PoslockModifier => LocalizationManager.RightLang.ConfigWindow_Param_PoslockModifier,
         PluginConfigInt.BeneficialAreaStrategy => LocalizationManager.RightLang.ConfigWindow_Auto_BeneficialAreaStrategy,
 
         // UI
@@ -144,7 +143,6 @@ internal static class ConfigTranslation
 
         // extra
         PluginConfigBool.SayOutStateChanged => LocalizationManager.RightLang.ConfigWindow_Param_SayOutStateChanged,
-        PluginConfigBool.PoslockCasting => LocalizationManager.RightLang.ConfigWindow_Param_PoslockCasting,
         PluginConfigBool.ShowTooltips => LocalizationManager.RightLang.ConfigWindow_Param_ShowTooltips,
         PluginConfigBool.InDebug => LocalizationManager.RightLang.ConfigWindow_Param_InDebug,
         PluginConfigBool.AutoOpenChest => "Auto Open the treasure chest",
@@ -241,7 +239,6 @@ internal static class ConfigTranslation
 
     public static string ToDescription(this PluginConfigInt config) => config switch
     {
-        PluginConfigInt.PoslockModifier => LocalizationManager.RightLang.ConfigWindow_Param_PoslockDescription,
         PluginConfigInt.AutoDefenseNumber => LocalizationManager.RightLang.ConfigWindow_Auto_AutoDefenseNumber,
 
         _ => string.Empty,
