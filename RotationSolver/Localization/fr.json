@@ -81,7 +81,6 @@
   "ConfigWindow_Param_SampleLength": "Drawing smoothness.",
   "ConfigWindow_Param_KeyBoardNoise": "Simulate the effect of pressing abilities",
   "ConfigWindow_Param_KeyBoardNoiseTimes": "Temps d'effet",
-  "ConfigWindow_Param_DrawMeleeOffset": "Dessiner le tracé pour les mêlés sur l'écran",
   "ConfigWindow_Param_ShowMoveTarget": "Afficher la cible de l'action de déplacement",
   "ConfigWindow_Param_ShowTarget": "Montrer la cible",
   "ConfigWindow_Param_TargetIconSize": "The size of the next ability that will be used icon.",

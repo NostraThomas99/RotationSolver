@@ -138,7 +138,6 @@ internal class Strings
     public string ConfigWindow_Param_SampleLength { get; set; } = "Drawing smoothness.";
     public string ConfigWindow_Param_KeyBoardNoise { get; set; } = "Simulate the effect of pressing abilities";
     public string ConfigWindow_Param_KeyBoardNoiseTimes { get; set; } = "Effect times";
-    public string ConfigWindow_Param_DrawMeleeOffset { get; set; } = "Draw the offset of melee on the screen";
     public string ConfigWindow_Param_ShowMoveTarget { get; set; } = "Show the target of the move action";
     public string ConfigWindow_Param_ShowTarget { get; set; } = "Show Target";
     public string ConfigWindow_Param_TargetIconSize { get; set; } = "The size of the next ability that will be used icon.";

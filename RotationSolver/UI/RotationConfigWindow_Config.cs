@@ -478,9 +478,7 @@ public partial class RotationConfigWindow
         new CheckBoxSearchPlugin(PluginConfigBool.ShowBeneficialPositions,
             new ColorEditSearchPlugin(PluginConfigVector4.BeneficialPositionColor),
             new ColorEditSearchPlugin(PluginConfigVector4.HoveredBeneficialPositionColor)
-        ),
-
-        new CheckBoxSearchPlugin(PluginConfigBool.DrawMeleeOffset)),
+        )),
     };
 
     // Windows

@@ -81,7 +81,6 @@
   "ConfigWindow_Param_SampleLength": "Drawing smoothness.",
   "ConfigWindow_Param_KeyBoardNoise": "Simulate the effect of pressing abilities",
   "ConfigWindow_Param_KeyBoardNoiseTimes": "模拟按下次数",
-  "ConfigWindow_Param_DrawMeleeOffset": "在屏幕上绘制近战最大边缘距离",
   "ConfigWindow_Param_ShowMoveTarget": "显示移动技能的目标",
   "ConfigWindow_Param_ShowTarget": "显示目标",
   "ConfigWindow_Param_TargetIconSize": "The size of the next ability that will be used icon.",
