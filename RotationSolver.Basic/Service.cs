@@ -10,6 +10,33 @@ namespace RotationSolver.Basic;
 internal class Service : IDisposable
 {
     public const string COMMAND = "/rotation", USERNAME = "Jaksuhn", REPO = "RotationSolver", BRANCH = "testing";
+
+    // From https://GitHub.com/PunishXIV/Orbwalker/blame/master/Orbwalker/Memory.cs#L85-L87
+    [Signature("F3 0F 10 05 ?? ?? ?? ?? 0F 2E C6 0F 8A", ScanType = ScanType.StaticAddress, Fallibility = Fallibility.Infallible)]
+    static IntPtr forceDisableMovementPtr = IntPtr.Zero;
+    private static unsafe ref int ForceDisableMovement => ref *(int*)(forceDisableMovementPtr + 4);
+
+    static bool _canMove = true;
+    internal static unsafe bool CanMove
+    {
+        get => ForceDisableMovement == 0;
+        set
+        {
+            var realCanMove = value || DataCenter.NoPoslock;
+            if (_canMove == realCanMove) return;
+            _canMove = realCanMove;
+
+            if (!realCanMove)
+            {
+                ForceDisableMovement++;
+            }
+            else if (ForceDisableMovement > 0)
+            {
+                ForceDisableMovement--;
+            }
+        }
+    }
+
     public static float CountDownTime => Countdown.TimeRemaining;
     public static PluginConfig Config { get; set; } = new PluginConfig();
 
@@ -34,5 +61,11 @@ internal class Service : IDisposable
 
     public static ExcelSheet<T> GetSheet<T>() where T : ExcelRow => Svc.Data.GetExcelSheet<T>();
 
-    public void Dispose() { }
+    public void Dispose()
+    {
+        if (!_canMove && ForceDisableMovement > 0)
+        {
+            ForceDisableMovement--;
+        }
+    }
 }
