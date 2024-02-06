@@ -10,6 +10,18 @@ namespace RotationSolver.Basic;
 internal class Service : IDisposable
 {
     public const string COMMAND = "/rotation", USERNAME = "Jaksuhn", REPO = "RotationSolver", BRANCH = "testing";
+
+    static bool _canMove = true;
+    internal static unsafe bool CanMove
+    {
+        set
+        {
+            var realCanMove = value || DataCenter.NoPoslock;
+            if (_canMove == realCanMove) return;
+            _canMove = realCanMove;
+        }
+    }
+
     public static float CountDownTime => Countdown.TimeRemaining;
     public static PluginConfig Config { get; set; } = new PluginConfig();
 
