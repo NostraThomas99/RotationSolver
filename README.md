@@ -24,6 +24,16 @@ The best action can be highlighted as a recommendation or automatically executed
 
 It is designed for `general combat`, not for savage or ultimate. Use it carefully.
 
+## Installation
+Assuming you are already using FFXIV quick launcher with it's ingame features enabled follow these steps to add this repository:
+
+1. Open Dalamud settings by typing `/xlplugins` command.
+2. Click "Settings" button.
+3. Go to "Experimental" tab.
+4. Find "Custom Plugin Repositories" section and paste the repo into the field
+5. Hit the plus sign to the right of the field to add it a
+6. Click "Save" button in the bottom right.
+
 ## Compatibility
 
 Plugins that affect the targeting system or action system have varying levels of incompatibility with Rotation Solver. Some may interfer with the action execution and some may prevent operation entirely. The following list is not _guaranteed_ to cause issues, but there are reports, nor is this list exhaustive.
