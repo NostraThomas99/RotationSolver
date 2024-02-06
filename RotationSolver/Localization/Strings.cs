@@ -117,6 +117,7 @@ internal class Strings
 
     public string ConfigWindow_Param_ClickingDelay { get; set; } = "The range of random delay for clicking actions.";
     public string ConfigWindow_Param_StopCastingDelay { get; set; } = "The range of random delay for stopping casting when the target is dead or immune to damage.";
+    public string ConfigWindow_Param_PoslockCasting { get; set; } = "Lock the movement when casting or when doing some actions.";
     public string ConfigWindow_Param_UseStopCasting { get; set; } = "Stops casting when the target is dead.";
     public string ConfigWindow_Param_ShowTooltips { get; set; } = "Show tooltips";
     public string ConfigWindow_Param_InDebug { get; set; } = "Debug Mode";
@@ -126,6 +127,8 @@ internal class Strings
     public string ConfigWindow_Param_BossTimeToKill { get; set; } = "If target's time until death is higher than this, regard it as boss.";
 
     public string ConfigWindow_Param_DyingTimeToKill { get; set; } = "If target's time until death is lower than this, regard it is dying.";
+    public string ConfigWindow_Param_PoslockModifier { get; set; } = "The modifier key to unlock the movement temporary";
+    public string ConfigWindow_Param_PoslockDescription { get; set; } = "LT is for gamepad player";
     public string ConfigWindow_Param_TeachingMode { get; set; } = "Teaching mode";
     public string ConfigWindow_Param_TeachingModeColor { get; set; } = "Prompt box color of teaching mode";
     public string ConfigWindow_Param_MovingTargetColor { get; set; } = "Prompt box color of moving target";

@@ -77,7 +77,12 @@ internal static class DataCenter
 
     public static ICustomRotation RightNowRotation { get; internal set; }
 
-    internal static bool NoPoslock => Svc.Condition[ConditionFlag.OccupiedInEvent];
+    internal static bool NoPoslock => Svc.Condition[ConditionFlag.OccupiedInEvent]
+        || !Service.Config.GetValue(PluginConfigBool.PoslockCasting)
+        //Key cancel.
+        || Svc.KeyState[ConfigurationHelper.Keys[Service.Config.GetValue(PluginConfigInt.PoslockModifier) % ConfigurationHelper.Keys.Length]]
+        //Gamepad cancel.
+        || Svc.GamepadState.Raw(Dalamud.Game.ClientState.GamePad.GamepadButtons.L2) >= 0.5f;
 
     internal static DateTime EffectTime { private get; set; } = DateTime.Now;
     internal static DateTime EffectEndTime { private get; set; } = DateTime.Now;
