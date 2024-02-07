@@ -48,9 +48,11 @@ Plugins that affect the targeting system or action system have varying levels of
 
 ## Links
 
-If you have any questions about usage, please check the [Wiki](https://archidog1998.github.io/RotationSolver/#/).
+For how to **develop** rotations for Rotation Solver, see the [Wiki](https://archidog1998.github.io/RotationSolver/#/).
 
 The rotations definitions are [here](https://github.com/ArchiDog1998/FFXIVRotations)
+
+For questions and support about installation and usage, please ask on the Discord.
 
 [![Discord](https://discordapp.com/api/guilds/1064448004498653245/embed.png?style=banner2)](https://discord.gg/p54TZMPnC9)
 
