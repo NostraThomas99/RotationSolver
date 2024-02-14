@@ -187,10 +187,9 @@ public partial class BaseAction
         Target = target;
         AffectedTargets = affectedTargets;
 
-        if (!option.HasFlag(CanUseOption.IgnoreTarget)) _targetId = target.ObjectId;
+        //if (!option.HasFlag(CanUseOption.IgnoreTarget)) _targetId = target.ObjectId; // Disabled because no longer needed?
         return true;
     }
-
     private bool CheckForCombo()
     {
         if (ComboIdsNot != null)
@@ -224,19 +223,23 @@ public partial class BaseAction
     public unsafe bool Use()
     {
         var adjustId = AdjustedID;
+        //Svc.Log.Verbose($"Action use requested for {adjustId}");
         if (_action.TargetArea && adjustId == ID)
         {
             var loc = new FFXIVClientStructs.FFXIV.Common.Math.Vector3() { X = Position.X, Y = Position.Y, Z = Position.Z };
 
+            //Svc.Log.Verbose($"Action has a target area, must specify target of {loc.X}, {loc.Y}, {loc.Z}");
             return ActionManager.Instance()->UseActionLocation(ActionType.Action, ID, Player.Object.ObjectId, &loc);
         }
-        else if (Svc.Objects.SearchById(_targetId) == null)
+        else if (Svc.Objects.SearchById(TargetID) == null)
         {
+            //Svc.Log.Verbose($"{TargetID} not found, dropping action");
             return false;
         }
         else
         {
-            return ActionManager.Instance()->UseAction(ActionType.Action, adjustId, _targetId);
+            //Svc.Log.Verbose($"Using action {adjustId} on target {TargetID}");
+            return ActionManager.Instance()->UseAction(ActionType.Action, adjustId, TargetID);
         }
     }
 }

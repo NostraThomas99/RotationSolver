@@ -53,7 +53,22 @@ public partial class BaseAction
     /// <summary>
     /// The action's target.
     /// </summary>
-    public BattleChara Target { get; private set; } = Player.Object;
+    public BattleChara Target { get; private set; }
+
+    public uint TargetID
+    {
+        get
+        {
+            if (Target == null)
+            {
+                return Svc.ClientState.LocalPlayer.ObjectId;
+            }
+            else
+            {
+                return Target.ObjectId;
+            }
+        }
+    }
 
     /// <inheritdoc/>
     public BattleChara[] AffectedTargets { get; private set; } = Array.Empty<BattleChara>();
@@ -64,7 +79,7 @@ public partial class BaseAction
     /// The position
     /// </summary>
     public Vector3 Position { get; private set; } = default;
-    private uint _targetId = Player.Object?.ObjectId ?? 0;
+    //private uint _targetId = 0;
 
     private Func<IEnumerable<BattleChara>, bool, BattleChara> _choiceTarget = null;
 
