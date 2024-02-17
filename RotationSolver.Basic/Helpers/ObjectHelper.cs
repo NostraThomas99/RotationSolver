@@ -75,9 +75,18 @@ public static class ObjectHelper
                 Svc.Log.Debug($"{nameof(IsAlliance)}: GameObject is null.");
                 return false;
             }
+            var objStruct = obj.Struct();
 
-            return ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
-                || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct());
+            if (objStruct == null)
+            {
+                Svc.Log.Debug($"{nameof(IsAlliance)}: GameObject struct is null");
+                return false;
+            }
+            else
+            {
+                return ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, objStruct)
+                    || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, objStruct);
+            }
         }
         catch (Exception ex)
         {
