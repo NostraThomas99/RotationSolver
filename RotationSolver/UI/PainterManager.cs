@@ -218,19 +218,6 @@ internal static class PainterManager
         var annulus = new Drawing3DAnnulusO(Player.Object, 3, 3 + Service.Config.GetValue(PluginConfigFloat.MeleeRangeOffset), 0, 2);
         annulus.InsideColor = ImGui.ColorConvertFloat4ToU32(new Vector4(0.8f, 0.3f, 0.2f, 0.15f));
 
-        annulus.UpdateEveryFrame = () =>
-        {
-            if (Player.Available && (Player.Object.IsJobCategory(JobRole.Tank) || Player.Object.IsJobCategory(JobRole.Melee)) && (Svc.Targets.Target?.IsEnemy() ?? false) && Service.Config.GetValue(PluginConfigBool.DrawMeleeOffset)
-            && ActionUpdater.NextGCDAction == null)
-            {
-                annulus.Target = Svc.Targets.Target;
-            }
-            else
-            {
-                annulus.Target = null;
-            }
-        };
-
         var color = ImGui.GetColorU32(Service.Config.GetValue(PluginConfigVector4.MovingTargetColor));
         var movingTarget = new Drawing3DHighlightLine(default, default, 0, color, 3);
         movingTarget.UpdateEveryFrame = () =>

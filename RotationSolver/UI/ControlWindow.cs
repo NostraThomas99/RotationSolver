@@ -11,7 +11,6 @@ namespace RotationSolver.UI;
 
 internal class ControlWindow : CtrlWindow
 {
-    public static IAction Wrong { get; set; }
     public static DateTime DidTime { get; set; }
 
     public ControlWindow()
@@ -194,16 +193,6 @@ internal class ControlWindow : CtrlWindow
 
                 ImGui.Text("Auto: " + DataCenter.AutoStatus.ToString());
             }
-        }
-
-        if (Service.Config.GetValue(PluginConfigFloat.MistakeRatio) > 0)
-        {
-            ImGui.SameLine();
-            ImGui.TextColored(ImGuiColors.DPSRed, "    | Mistake | \n    | Mistake | ");
-            ImGui.SameLine();
-
-            DrawIAction(DateTime.Now - DidTime < TimeSpan.FromSeconds(5) ? Wrong : null,
-                Service.Config.GetValue(PluginConfigFloat.ControlWindowGCDSize), 1);
         }
     }
 

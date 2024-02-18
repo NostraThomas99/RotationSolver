@@ -13,7 +13,6 @@ using ExCSS;
 using FFXIVClientStructs.FFXIV.Client.Game.Fate;
 using FFXIVClientStructs.FFXIV.Common.Component.BGCollision;
 using Lumina.Excel.GeneratedSheets;
-using Newtonsoft.Json.Linq;
 using RotationSolver.Basic.Configuration;
 using RotationSolver.Data;
 using RotationSolver.Helpers;
@@ -268,26 +267,6 @@ public partial class RotationConfigWindow : Window
                     }
                 }
             }
-
-            if (wholeWidth <= 60 * Scale
-                ? IconSet.GetTexture("https://storage.ko-fi.com/cdn/brandasset/kofi_s_logo_nolabel.png", out var texture)
-                : IconSet.GetTexture("https://storage.ko-fi.com/cdn/brandasset/kofi_bg_tag_dark.png", out texture))
-            {
-                var width = Math.Min(150 * Scale, Math.Max(Scale * MIN_COLUMN_WIDTH, Math.Min(wholeWidth, texture.Width)));
-                var size = new Vector2(width, width * texture.Height / texture.Width);
-                size *= MathF.Max(Scale * MIN_COLUMN_WIDTH / size.Y, 1);
-                var result = false;
-                ImGuiHelper.DrawItemMiddle(() =>
-                {
-                    ImGui.SetCursorPosY(ImGui.GetWindowSize().Y + ImGui.GetScrollY() - size.Y);
-                    result = ImGuiHelper.NoPaddingNoColorImageButton(texture.ImGuiHandle, size, "Donate Plugin");
-                }, wholeWidth, size.X);
-
-                if (result)
-                {
-                    Util.OpenLink("https://ko-fi.com/B0B0IN5DX");
-                }
-            }
         }
     }
 
@@ -317,7 +296,7 @@ public partial class RotationConfigWindow : Window
             {
                 if (!File.Exists(file))
                 {
-                    var url = $"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Images/{name}.png";
+                    var url = $"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/{Service.BRANCH}/Images/{name}.png";
 
                     using var client = new HttpClient();
                     var stream = await client.GetStreamAsync(url);
@@ -647,18 +626,6 @@ public partial class RotationConfigWindow : Window
             }
         }
 
-        var sayHelloCount = OtherConfiguration.RotationSolverRecord.SayingHelloCount;
-        if (sayHelloCount > 0)
-        {
-            using var color = ImRaii.PushColor(ImGuiCol.Text, new Vector4(0.2f, 0.8f, 0.95f, 1));
-            var countStr = string.Format(LocalizationManager.RightLang.ConfigWindow_About_SayHelloCount, sayHelloCount);
-
-            ImGuiHelper.DrawItemMiddle(() =>
-            {
-                ImGui.TextWrapped(countStr);
-            }, width, ImGui.CalcTextSize(countStr).X);
-        }
-
         _aboutHeaders.Draw();
     }
 
@@ -815,19 +782,8 @@ public partial class RotationConfigWindow : Window
             Util.OpenLink("https://crowdin.com/project/rotationsolver");
         }
 
-        var text = "My story about FFXIV and Rotation Solver\n - ArchiTed / Youtube";
+        var text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
         var textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink("https://www.youtube.com/watch?v=Adigd5uqDx4");
-            }
-        }, width, textWidth);
-
-
-        text = LocalizationManager.RightLang.ConfigWindow_About_OpenConfigFolder;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
         ImGuiHelper.DrawItemMiddle(() =>
         {
             if (ImGui.Button(text))
@@ -1438,16 +1394,6 @@ public partial class RotationConfigWindow : Window
 
                 if (_activeAction is IBaseAction action)
                 {
-                    if (Service.Config.GetValue(PluginConfigFloat.MistakeRatio) > 0
-                        && !action.IsFriendly && action.ChoiceTarget != TargetFilter.FindTargetForMoving)
-                    {
-                        enable = action.IsInMistake;
-                        if (ImGui.Checkbox($"{LocalizationManager.RightLang.ConfigWindow_Actions_IsInMistake}##{action.Name}InMistake", ref enable))
-                        {
-                            action.IsInMistake = enable;
-                        }
-                    }
-                    
                     ImGui.Separator();
 
                     var ttk = action.TimeToKill;
@@ -1544,16 +1490,6 @@ public partial class RotationConfigWindow : Window
                 {
                     await RotationUpdater.GetAllCustomRotationsAsync(DownloadOption.MustDownload | DownloadOption.ShowList);
                 });
-            }
-        }, width, textWidth);
-
-        text = LocalizationManager.RightLang.ConfigWindow_Rotations_Links;
-        textWidth = ImGuiHelpers.GetButtonSize(text).X;
-        ImGuiHelper.DrawItemMiddle(() =>
-        {
-            if (ImGui.Button(text))
-            {
-                Util.OpenLink($"https://github.com/{Service.USERNAME}/{Service.REPO}/blob/main/RotationsLink.md");
             }
         }, width, textWidth);
 
@@ -1838,7 +1774,7 @@ public partial class RotationConfigWindow : Window
     private static readonly CollapsingHeaderGroup _idsHeader = new(new()
     {
         { () => LocalizationManager.RightLang.ConfigWindow_List_Statuses, DrawListStatuses},
-        { () => Service.Config.GetValue(PluginConfigBool.UseDefenseAbility) ? LocalizationManager.RightLang.ConfigWindow_List_Actions : string.Empty, DrawListActions},
+        { () => LocalizationManager.RightLang.ConfigWindow_List_Actions, DrawListActions},
         { () => LocalizationManager.RightLang.ConfigWindow_List_Territories, DrawListTerritories},
     });
     private static void DrawListStatuses()

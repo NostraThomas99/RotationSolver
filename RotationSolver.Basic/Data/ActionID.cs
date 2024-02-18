@@ -5211,17 +5211,37 @@ public enum ActionID : uint
     /// <summary>
     /// 
     /// </summary>
-    LostBravery = 20713,
-
-    /// <summary>
-    /// 
-    /// </summary>
     LostProtect = 20719,
 
     /// <summary>
     /// 
     /// </summary>
     LostShell = 20710,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    LostReflect = 20711,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    LostBravery = 20713,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    LostFontOfPower = 20717,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    BannerOfHonoredSacrifice = 20721,
+
+    /// <summary>
+    /// 
+    /// </summary>
+    LostAssassination = 23914,
 
     /// <summary>
     /// 
@@ -5257,6 +5277,15 @@ public enum ActionID : uint
     /// 
     /// </summary>
     LostSeraphStrike = 22354,
+
+    #endregion    #endregion
+
+    #region Duty Actions
+
+    /// <summary>
+    /// 
+    /// </summary>
+    Vril = 8517, /// ReAction also listing 9345, but that might be for normal mode, found 8517 doing Extreme through RS debug
 
     #endregion
 }

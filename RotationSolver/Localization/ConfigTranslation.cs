@@ -59,9 +59,6 @@ internal static class ConfigTranslation
         PluginConfigBool.ToggleManual => LocalizationManager.RightLang.ConfigWindow_Param_ToggleManual,
         PluginConfigBool.ToggleAuto => LocalizationManager.RightLang.ConfigWindow_Param_ToggleAuto,
         PluginConfigBool.UseStopCasting => LocalizationManager.RightLang.ConfigWindow_Param_UseStopCasting,
-        PluginConfigBool.SayHelloToUsers => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToUsers,
-        PluginConfigBool.SayHelloToAll => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToAll,
-        PluginConfigBool.JustSayHelloOnce => LocalizationManager.RightLang.ConfigWindow_Basic_JustSayHelloOnce,
         PluginConfigBool.UseAdditionalConditions => LocalizationManager.RightLang.ConfigWindow_Basic_UseAdditionalConditions,
 
         // UI
@@ -72,7 +69,6 @@ internal static class ConfigTranslation
         PluginConfigBool.TeachingMode => LocalizationManager.RightLang.ConfigWindow_Param_TeachingMode,
         PluginConfigBool.ShowMoveTarget => LocalizationManager.RightLang.ConfigWindow_Param_ShowMoveTarget,
         PluginConfigBool.ShowTarget => LocalizationManager.RightLang.ConfigWindow_Param_ShowTarget,
-        PluginConfigBool.DrawMeleeOffset => LocalizationManager.RightLang.ConfigWindow_Param_DrawMeleeOffset,
         PluginConfigBool.KeyBoardNoise => LocalizationManager.RightLang.ConfigWindow_Param_KeyBoardNoise,
         PluginConfigBool.ShowInfoOnDtr => LocalizationManager.RightLang.ConfigWindow_Param_ShowInfoOnDtr,
         PluginConfigBool.ShowInfoOnToast => LocalizationManager.RightLang.ConfigWindow_Param_ShowInfoOnToast,
@@ -118,10 +114,15 @@ internal static class ConfigTranslation
         PluginConfigBool.HealWhenNothingTodo => LocalizationManager.RightLang.ConfigWindow_Param_HealWhenNothingTodo,
         PluginConfigBool.UseResourcesAction => LocalizationManager.RightLang.ConfigWindow_Auto_UseResourcesAction,
         PluginConfigBool.OnlyHealSelfWhenNoHealer => LocalizationManager.RightLang.ConfigWindow_Auto_OnlyHealSelfWhenNoHealer,
+        PluginConfigBool.UseLostActions => LocalizationManager.RightLang.ConfigWindow_Auto_UseLostActions,
+        PluginConfigBool.UseLostFlareStarOnMobs => LocalizationManager.RightLang.ConfigWindow_Auto_UseLostFlareStarOnMobs,
+        PluginConfigBool.UseLostAssassinationOnMobs => LocalizationManager.RightLang.ConfigWindow_Auto_UseLostAssassinationOnMobs,
+        PluginConfigBool.LostReflectAutoRefresh => LocalizationManager.RightLang.ConfigWindow_Auto_LostReflectAutoRefresh,
 
         // target
         PluginConfigBool.AddEnemyListToHostile => LocalizationManager.RightLang.ConfigWindow_Param_AddEnemyListToHostile,
         PluginConfigBool.OnlyAttackInEnemyList => LocalizationManager.RightLang.ConfigWindow_Param_OnlyAttackInEnemyList,
+        PluginConfigBool.TargetAllSolo => LocalizationManager.RightLang.ConfigWindow_Param_TargetAllSolo,
         PluginConfigBool.ChooseAttackMark => LocalizationManager.RightLang.ConfigWindow_Param_ChooseAttackMark,
         PluginConfigBool.CanAttackMarkAOE => LocalizationManager.RightLang.ConfigWindow_Param_CanAttackMarkAOE,
         PluginConfigBool.FilterStopMark => LocalizationManager.RightLang.ConfigWindow_Param_FilterStopMark,
@@ -175,7 +176,6 @@ internal static class ConfigTranslation
         PluginConfigFloat.NotInCombatDelayMin => LocalizationManager.RightLang.ConfigWindow_Param_NotInCombatDelay,
         PluginConfigFloat.ClickingDelayMin => LocalizationManager.RightLang.ConfigWindow_Param_ClickingDelay,
         PluginConfigFloat.StopCastingDelayMin => LocalizationManager.RightLang.ConfigWindow_Param_StopCastingDelay,
-        PluginConfigFloat.MistakeRatio => LocalizationManager.RightLang.ConfigWindow_Param_ClickMistake,
         PluginConfigFloat.MinUpdatingTime => LocalizationManager.RightLang.ConfigWindow_Basic_MinUpdatingTime,
 
         // UI
@@ -204,6 +204,7 @@ internal static class ConfigTranslation
         PluginConfigFloat.AutoHealTimeToKill => LocalizationManager.RightLang.ConfigWindow_Auto_AutoHealTimeToKill,
         PluginConfigFloat.ProvokeDelayMin => LocalizationManager.RightLang.ConfigWindow_Auto_ProvokeDelay,
         PluginConfigFloat.HealthForGuard => LocalizationManager.RightLang.ConfigWindow_Param_HealthForGuard,
+        PluginConfigFloat.LostAssassinationTimeToKill => LocalizationManager.RightLang.ConfigWindow_Auto_LostAssassinationTimeToKill,
         // target
         PluginConfigFloat.BossTimeToKill => LocalizationManager.RightLang.ConfigWindow_Param_BossTimeToKill,
         PluginConfigFloat.DyingTimeToKill => LocalizationManager.RightLang.ConfigWindow_Param_DyingTimeToKill,
@@ -255,8 +256,6 @@ internal static class ConfigTranslation
         PluginConfigBool.CanAttackMarkAOE => LocalizationManager.RightLang.ConfigWindow_Param_AttackMarkAOEDesc,
         PluginConfigBool.MoveTowardsScreenCenter => LocalizationManager.RightLang.ConfigWindow_Param_MoveTowardsScreenDesc,
         PluginConfigBool.MoveAreaActionFarthest => LocalizationManager.RightLang.ConfigWindow_Param_MoveAreaActionFarthestDesc,
-
-        PluginConfigBool.SayHelloToUsers => LocalizationManager.RightLang.ConfigWindow_Basic_SayHelloToUsersDesc,
 
         PluginConfigBool.AutoOpenChest => "Because of the feature in pandora, there is an issue the treasure chest cannot be opened in some cases, I find the code from roll for loot. Once Pandora fixed that, this feature will be deleted.",
         _ => string.Empty,

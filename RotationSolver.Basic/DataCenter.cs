@@ -28,6 +28,18 @@ internal static class DataCenter
         }
     }
 
+    private static readonly HashSet<uint> _forayAreas = new() {
+        // Eureka zones
+        732, 763, 795, 827,
+
+        // Bozjan Southern Front (includes CLL)
+        920,
+        // Delubrum Reginae + Savage
+        936, 937,
+        // Zadnor (includes Dalriada)
+        975,
+    };
+
     internal static Queue<MapEffectData> MapEffects { get; } = new(64);
     internal static Queue<ObjectEffectData> ObjectEffects { get; } = new(64);
     internal static Queue<VfxNewData> VfxNewData { get; } = new(64);
@@ -116,6 +128,12 @@ internal static class DataCenter
         return keep;
     }
     public static HashSet<uint> DisabledActionSequencer { get; set; } = new HashSet<uint>();
+
+    internal static bool InSoloDuty() {
+        return Svc.Condition[ConditionFlag.BoundByDuty56]
+            && PartyMembers.Count(p => p.GetHealthRatio() > 0) == 1
+            && !_forayAreas.Contains(Territory.RowId);
+    }
 
     private static List<NextAct> NextActs = new();
     public static IAction ActionSequencerAction { private get; set; }
@@ -258,6 +276,8 @@ internal static class DataCenter
 
     public static bool IsManual { get; set; } = false;
 
+    public static bool IsActivated() => State || IsManual || Service.Config.GetValue(PluginConfigBool.TeachingMode);
+
     public static void SetSpecialType(SpecialCommandType specialType)
     {
         _specialType = specialType;
@@ -295,6 +315,10 @@ internal static class DataCenter
     public static ObjectListDelay<BattleChara> HostileTargets { get; } = new ObjectListDelay<BattleChara>(
     () => (Service.Config.GetValue(PluginConfigFloat.HostileDelayMin),
     Service.Config.GetValue(PluginConfigFloat.HostileDelayMax)));
+
+    public static IEnumerable<BattleChara> HostileTargetsCastingAOE { get; internal set; } = Array.Empty<BattleChara>();
+
+    public static IEnumerable<BattleChara> HostileTargetsCastingToTank { get; internal set; } = Array.Empty<BattleChara>();
 
     public static IEnumerable<BattleChara> AllHostileTargets { get; internal set; } = Array.Empty<BattleChara>();
 

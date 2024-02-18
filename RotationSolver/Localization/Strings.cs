@@ -117,7 +117,6 @@ internal class Strings
 
     public string ConfigWindow_Param_ClickingDelay { get; set; } = "The range of random delay for clicking actions.";
     public string ConfigWindow_Param_StopCastingDelay { get; set; } = "The range of random delay for stopping casting when the target is dead or immune to damage.";
-    public string ConfigWindow_Param_ClickMistake { get; set; } = "How likely is it that RS will click the wrong action.";
     public string ConfigWindow_Param_PoslockCasting { get; set; } = "Lock the movement when casting or when doing some actions.";
     public string ConfigWindow_Param_UseStopCasting { get; set; } = "Stops casting when the target is dead.";
     public string ConfigWindow_Param_ShowTooltips { get; set; } = "Show tooltips";
@@ -139,7 +138,6 @@ internal class Strings
     public string ConfigWindow_Param_SampleLength { get; set; } = "Drawing smoothness.";
     public string ConfigWindow_Param_KeyBoardNoise { get; set; } = "Simulate the effect of pressing abilities";
     public string ConfigWindow_Param_KeyBoardNoiseTimes { get; set; } = "Effect times";
-    public string ConfigWindow_Param_DrawMeleeOffset { get; set; } = "Draw the offset of melee on the screen";
     public string ConfigWindow_Param_ShowMoveTarget { get; set; } = "Show the target of the move action";
     public string ConfigWindow_Param_ShowTarget { get; set; } = "Show Target";
     public string ConfigWindow_Param_TargetIconSize { get; set; } = "The size of the next ability that will be used icon.";
@@ -220,6 +218,7 @@ internal class Strings
     public string ConfigWindow_Param_TargetToHostileType2 { get; set; } = "Previously engaged targets or all targets that are in range\n(engages on countdown timer and resets when out of combat)";
     public string ConfigWindow_Param_TargetToHostileType3 { get; set; } = "Previously engaged targets (engages on countdown timer)";
     public string ConfigWindow_Param_AddEnemyListToHostile { get; set; } = "Add enemy list to the hostile targets.";
+    public string ConfigWindow_Param_TargetAllSolo { get; set; } = "Force 'All targets' behavior while in solo duties.";
     public string ConfigWindow_Param_OnlyAttackInEnemyList { get; set; } = "Only attack the targets in enemy list.";
     public string ConfigWindow_Param_ChooseAttackMark { get; set; } = "Priority attack targets with attack markers";
     public string ConfigWindow_Param_CanAttackMarkAOE { get; set; } = "Allowed use of AoE to attack more mobs.";
@@ -650,8 +649,6 @@ internal class Strings
     public string TextToTalkWarning { get; set; } = "TextToTalk addon was not detected, please install it to make Rotation Solver give audio notifications!";
     public string AvariceWarning { get; set; } = "Avarice addon was not detected, please install it if you want to get the positional indicators for Rotation Solver!";
 
-    public string ClickingMistakeMessage { get; set; } = "OOOps! RS clicked the wrong action ({0})!";
-
     public string ConfigWindow_About_Punchline { get; set; } = "Analyses PvE combat information every frame and finds the best action.";
     public string ConfigWindow_About_Description { get; set; } = "This means almost all the information available in one frame in combat, including the status of all players in the party, the status of any hostile targets, skill cooldowns, the MP and HP of characters, the location of characters, casting status of the hostile target, combo, combat duration, player level, etc.\n\nThen, it will highlight the best action on the hot bar, or help you to click on it.";
 
@@ -684,7 +681,6 @@ internal class Strings
     public string ConfigWindow_Actions_DisabledConditionSet { get; set; } = "Disabled Condition";
     public string ConfigWindow_Actions_DisabledConditionSet_Description { get; set; } = "Conditions for automatic use of action being disabled.";
     public string ConfigWindow_Actions_ShowOnCDWindow { get; set; } = "Show on CD window";
-    public string ConfigWindow_Actions_IsInMistake { get; set; } = "Can be used by mistake";
 
     public string ConfigWindow_Configs_JobConfigTip { get; set; } = "This config is job specific";
 
@@ -765,7 +761,6 @@ internal class Strings
     public string ConfigWindow_Basic_ClickingDuration { get; set; } = "The clicking duration, RS will try to click at this moment.";
     public string ConfigWindow_Basic_WeaponDelay { get; set; } = "This is the clipping time.\nGCD is over. However, RS forgets to click the next action.";
     public string ConfigWindow_About_ClickingCount { get; set; } = "Rotation Solver helped you by clicking actions {0:N0} times.";
-    public string ConfigWindow_About_SayHelloCount { get; set; } = "You have said hello to other users {0:N0} times!";
     public string ConfigWindow_Auto_AutoHealTimeToKill { get; set; } = "Stop healing when time to kill is lower then...";
     public string ConfigWindow_UI_ShowHostiles { get; set; } = "Show the hostile target icon";
     public string ConfigWindow_UI_HostileIconHeight { get; set; } = "Hostile Icon height from position";
@@ -792,19 +787,19 @@ internal class Strings
 
     public string ConfigWindow_Auto_UseResourcesAction { get; set; } = "Use actions that use resources";
     public string ConfigWindow_Auto_OnlyHealSelfWhenNoHealer { get; set; } = "Only Heal self When Not a healer";
+    public string ConfigWindow_Auto_UseLostActions { get; set; } = "Use Lost Actions (Bozja)";
+    public string ConfigWindow_Auto_UseLostFlareStarOnMobs { get; set; } = "Use Lost Flare Star on non-boss targets";
+    public string ConfigWindow_Auto_UseLostAssassinationOnMobs { get; set; } = "Use Lost Assassination to kill non-boss targets";
+    public string ConfigWindow_Auto_LostReflectAutoRefresh { get; set; } = "Automatically refresh Lost Reflect before it expires";
+    public string ConfigWindow_Auto_LostAssassinationTimeToKill { get; set; } = "Expected TTK required to use Lost Assassination on target";
 
     public string ConfigWindow_Auto_HealthForAutoDefense { get; set; } = "HP Ratio about defense single of Tanks";
-    public string ConfigWindow_Basic_SayHelloToUsers { get; set; } = "Say hello to the users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToAll { get; set; } = "Say hello to all users of Rotation Solver.";
-    public string ConfigWindow_Basic_SayHelloToUsersDesc { get; set; } = "It can only be disabled for users, not authors and contributors.\nIf you want to be greeted by other users, please DM ArchiTed in Discord Server with your Hash!";
-    public string ConfigWindow_Basic_JustSayHelloOnce { get; set; } = "Just say hello once to the same user.";
 
     public string ConfigWindow_About_Clicking100k { get; set; } = "Well, you must be a lazy player!";
     public string ConfigWindow_About_Clicking500k { get; set; } = "You're tiring RS out, give it a break!";
 
     public string ConfigWindow_About_ThanksToSupporters { get; set; } = "Many thanks to the sponsors.";
     public string ConfigWindow_Rotations_Download { get; set; } = "Download Rotations";
-    public string ConfigWindow_Rotations_Links { get; set; } = "Links of the rotations online";
     public string ConfigWindow_Options_ForcedEnableCondition { get; set; } = "Use Forced Enable Condition";
     public string ConfigWindow_Options_ForcedEnableConditionDesc { get; set; } = "The conditions of forced to make it true.";
 

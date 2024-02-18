@@ -19,43 +19,24 @@ internal static class ActionUpdater
 
     internal static IAction NextAction { get; set; }
     internal static IBaseAction NextGCDAction { get; set; }
-    internal static IAction WrongAction { get; set; }
-    static readonly Random _wrongRandom = new();
 
     internal static void ClearNextAction()
     {
         SetAction(0);
-        WrongAction = NextAction = NextGCDAction = null;
+        NextAction = NextGCDAction = null;
     }
 
     internal static void UpdateNextAction()
     {
         PlayerCharacter localPlayer = Player.Object;
         var customRotation = DataCenter.RightNowRotation;
+        if (!DataCenter.IsActivated()) return;
 
         try
         {
             if (localPlayer != null && customRotation != null
                 && customRotation.TryInvoke(out var newAction, out var gcdAction))
             {
-                if (Service.Config.GetValue(PluginConfigFloat.MistakeRatio) > 0)
-                {
-                    var actions = customRotation.AllActions.Where(a =>
-                    {
-                        if (a.ID == newAction?.ID) return false;
-                        if (a is IBaseAction action)
-                        {
-                            return !action.IsFriendly && action.IsInMistake
-                            && action.ChoiceTarget != TargetFilter.FindTargetForMoving
-                            && action.CanUse(out _, CanUseOption.MustUseEmpty | CanUseOption.IgnoreClippingCheck);
-                        }
-                        return false;
-                    });
-
-                    var count = actions.Count();
-                    WrongAction = count > 0 ? actions.ElementAt(_wrongRandom.Next(count)) : null;
-                }
-
                 NextAction = newAction;
 
                 if (gcdAction is IBaseAction GcdAction)
@@ -73,7 +54,7 @@ internal static class ActionUpdater
             Svc.Log.Error(ex, "Failed to update next action.");
         }
 
-        WrongAction = NextAction = NextGCDAction = null;
+        NextAction = NextGCDAction = null;
     }
 
     private static void SetAction(uint id) => Svc.PluginInterface.GetOrCreateData("Avarice.ActionOverride", () => new List<uint>() { id })[0] = id;

@@ -229,7 +229,6 @@ public class GlobalConfig
     public SortedSet<Job> DisabledJobs { get; private set; } = new();
     public SortedSet<uint> DisabledActions { get; private set; } = new();
     public SortedSet<uint> NotInCoolDownActions { get; private set; } = new();
-    public SortedSet<uint> NotInMistakeActions { get; private set; } = new();
     public SortedSet<uint> DisabledItems { get; private set; } = new();
     public SortedSet<uint> NotInCoolDownItems { get; private set; } = new();
     public List<ActionEventInfo> Events { get; private set; } = new();
@@ -260,43 +259,42 @@ public enum PluginConfigInt : byte
 public enum PluginConfigBool : byte
 {
     [Default(true)] DrawIconAnimation,
-    [Default(true)] AutoOffBetweenArea,
-    [Default(true)] AutoOffCutScene,
+    [Default(false)] AutoOffBetweenArea,
+    [Default(false)] AutoOffCutScene,
     [Default(true)] AutoOffWhenDead,
     [Default(true)] AutoOffWhenDutyCompleted,
     [Default(true)] ChangeTargetForFate,
     [Default(true)] MoveTowardsScreenCenter,
-    [Default(true)] SayOutStateChanged,
+    [Default(false)] SayOutStateChanged,
     [Default(true)] ShowInfoOnDtr,
     [Default(false)] HealOutOfCombat,
-    [Default(true)] ShowInfoOnToast,
+    [Default(false)] ShowInfoOnToast,
     [Default(false)] RaiseAll,
 
     [Default(false)] PoslockCasting,
     [Default(false)] PosPassageOfArms,
-    [Default(true)] PosTenChiJin,
+    [Default(false)] PosTenChiJin,
     [Default(false)] PosFlameThrower,
     [Default(false)] PosImprovisation,
 
     [Default(true)] RaisePlayerByCasting,
     [Default(true)] RaiseBrinkOfDeath,
+    [Default(false)] TargetAllSolo,
     [Default(true)] AddEnemyListToHostile,
     [Default(false)] OnlyAttackInEnemyList,
     [Default(false)] UseTinctures,
     [Default(false)] UseHealPotions,
 
-    [Default(true)] DrawMeleeOffset,
-
     [Default(true)] ShowMoveTarget,
     [Default(false)] ShowTargetTimeToKill,
-    [Default(true)] ShowTarget,
+    [Default(false)] ShowTarget,
     [Default(true)] ChooseAttackMark,
     [Default(true)] CanAttackMarkAOE,
     [Default(true)] FilterStopMark,
-    [Default(true)] ShowHostilesIcons,
+    [Default(false)] ShowHostilesIcons,
 
-    [Default(true)] TeachingMode,
-    [Default(true)] UseOverlayWindow,
+    [Default(false)] TeachingMode,
+    [Default(false)] UseOverlayWindow,
     [Default(true)] KeyBoardNoise,
 
     [Default(true)] MoveAreaActionFarthest,
@@ -323,10 +321,10 @@ public enum PluginConfigBool : byte
 
     [Default(false)] ToggleManual,
     [Default(false)] ToggleAuto,
-    [Default(true)] OnlyShowWithHostileOrInDuty,
+    [Default(false)] OnlyShowWithHostileOrInDuty,
     [Default(false)] ShowControlWindow,
     [Default(false)] IsControlWindowLock,
-    [Default(true)] ShowNextActionWindow,
+    [Default(false)] ShowNextActionWindow,
     [Default(false)] IsInfoWindowNoInputs,
     [Default(false)] IsInfoWindowNoMove,
     [Default(false)] ShowItemsCooldown,
@@ -339,7 +337,7 @@ public enum PluginConfigBool : byte
     [Default(true)] TargetFatePriority,
     [Default(true)] TargetHuntingRelicLevePriority,
     [Default(true)] TargetQuestPriority,
-    [Default(true)] ShowToastsAboutDoAction,
+    [Default(false)] ShowToastsAboutDoAction,
 
     [Default(true)] UseAOEAction,
     [Default(false)] UseAOEWhenManual,
@@ -357,6 +355,11 @@ public enum PluginConfigBool : byte
     [Default(false)] TargetAllForFriendly,
     [Default(false)] ShowCooldownWindow,
 
+    [Default(true)] UseLostActions,
+    [Default(false)] UseLostFlareStarOnMobs,
+    [Default(true)] UseLostAssassinationOnMobs,
+    [Default(true)] LostReflectAutoRefresh,
+
     [Default(true)] RecordCastingArea,
 
     [Default(true)] AutoOffAfterCombat,
@@ -364,14 +367,11 @@ public enum PluginConfigBool : byte
     [Default(true)] AutoCloseChestWindow,
 
     [Default(true)] ShowStateIcon,
-    [Default(true)] ShowBeneficialPositions,
+    [Default(false)] ShowBeneficialPositions,
     [Default(false)] HideWarning,
 
     [Default(true)] HealWhenNothingTodo,
     [Default(true)] UseResourcesAction,
-    [Default(true)] SayHelloToAll,
-    [Default(true)] SayHelloToUsers,
-    [Default(false)] JustSayHelloOnce,
 
     [Default(false)] UseAdditionalConditions,
     [Default(false)] OnlyHealSelfWhenNoHealer,
@@ -393,8 +393,6 @@ public enum PluginConfigFloat : byte
     [Default(0.1f, 0f, 0.4f), Unit(ConfigUnitType.Seconds)] MinLastAbilityAdvanced,
     [Default(0.8f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealWhenNothingTodoBelow,
     [Default(0.6f, 0f, 1f), Unit(ConfigUnitType.Pixels)] TargetIconSize,
-
-    [Default(0f, 0f, 1f), Unit(ConfigUnitType.Percent)] MistakeRatio,
 
     [Default(0.4f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealthTankRatio,
     [Default(0.4f, 0f, 1f), Unit(ConfigUnitType.Percent)] HealthHealerRatio,
@@ -443,6 +441,7 @@ public enum PluginConfigFloat : byte
     [Default(24f, 0f, 90f), Unit(ConfigUnitType.Degree)] MoveTargetAngle,
     [Default(90f, 10f, 1800f), Unit(ConfigUnitType.Seconds)] BossTimeToKill,
     [Default(10f, 0f, 60f), Unit(ConfigUnitType.Seconds)] DyingTimeToKill,
+    [Default(15f, 0f, 1800f), Unit(ConfigUnitType.Seconds)] LostAssassinationTimeToKill,
 
     [Default(16f, 9.6f, 96f), Unit(ConfigUnitType.Pixels)] CooldownFontSize,
 

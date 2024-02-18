@@ -1,4 +1,5 @@
 ﻿using Dalamud.Game.ClientState.Objects.Enums;
+using ECommons.DalamudServices;
 using ECommons.GameFunctions;
 using ECommons.GameHelpers;
 using FFXIVClientStructs.FFXIV.Client.Game;
@@ -66,9 +67,33 @@ public static class ObjectHelper
     /// <param name="obj"></param>
     /// <returns></returns>
     public static unsafe bool IsAlliance(this GameObject obj)
-        => obj != null
-        && (ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
-        || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct()));
+    {
+        try
+        {
+            if (obj == null)
+            {
+                Svc.Log.Debug($"{nameof(IsAlliance)}: GameObject is null.");
+                return false;
+            }
+            var objStruct = obj.Struct();
+
+            if (objStruct == null)
+            {
+                Svc.Log.Debug($"{nameof(IsAlliance)}: GameObject struct is null");
+                return false;
+            }
+            else
+            {
+                return ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, objStruct)
+                    || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, objStruct);
+            }
+        }
+        catch (Exception ex)
+        {
+            Svc.Log.Error($"Exception in {nameof(IsAlliance)}: {ex}");
+            return false;
+        }
+    }
 
     /// <summary>
     /// Get the object kind.
@@ -132,6 +157,11 @@ public static class ObjectHelper
         if (act.CastType is 3 or 4) return _effectRangeCheck[id] = false;
         if (act.EffectRange is > 0 and < 8) return _effectRangeCheck[id] = false;
         return _effectRangeCheck[id] = true;
+    }
+
+    public static float RemainingCastTime(this BattleChara b)
+    {
+        return b.IsCasting ? b.TotalCastTime - b.CurrentCastTime : 999.99f;
     }
 
     /// <summary>

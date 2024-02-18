@@ -48,6 +48,9 @@ public class OtherConfiguration
         { (uint) ActionID.SteelCyclone, 2},
         { (uint) ActionID.VariantSpiritDart, 1 },
         { (uint) ActionID.VariantSpiritDart2, 1 },
+        { (uint) ActionID.LostRampage, 1 },
+        { (uint) ActionID.LostBurst, 1 },
+        { (uint) ActionID.LostFlarestar, 1 }
     };
 
     public static Dictionary<uint, float> ActionTTK = new()
@@ -235,7 +238,7 @@ public class OtherConfiguration
             try
             {
                 using var client = new HttpClient();
-                var str = client.GetStringAsync($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/main/Resources/{name}.json").Result;
+                var str = client.GetStringAsync($"https://raw.githubusercontent.com/{Service.USERNAME}/{Service.REPO}/{Service.BRANCH}/Resources/{name}.json").Result;
 
                 File.WriteAllText(path, str);
                 value = JsonConvert.DeserializeObject<T>(str, new JsonSerializerSettings()
