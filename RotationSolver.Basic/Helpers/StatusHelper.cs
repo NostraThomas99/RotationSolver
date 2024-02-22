@@ -173,21 +173,8 @@ public static class StatusHelper
 
     private static IEnumerable<Status> GetAllStatus(this BattleChara obj, bool isFromSelf)
     {
-        try
-        {
-            if (obj == null) return Array.Empty<Status>();
-            if (obj.StatusList == null || obj.StatusList.Length == 0) return Array.Empty<Status>();
-
-            return obj?.StatusList?.Where(status => !isFromSelf
-                                                  || status.SourceId == Player.Object.ObjectId
-                                                  || status.SourceObject?.OwnerId == Player.Object.ObjectId)
-                ?? Array.Empty<Status>();
-        }
-        catch (Exception ex)
-        {
-            Svc.Log.Error($"Failed to {nameof(GetAllStatus)}", ex);
-            return Array.Empty<Status>();
-        }
+        if (obj is not BattleChara b) return [];
+        return b.StatusList.Where(status => !isFromSelf || status.SourceId == Player.Object.ObjectId || status.SourceObject?.OwnerId == Player.Object.ObjectId);
     }
 
     /// <summary>
