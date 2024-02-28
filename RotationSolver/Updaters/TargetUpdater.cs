@@ -323,8 +323,8 @@ internal static partial class TargetUpdater
         {
             Svc.Log.Verbose($"{nameof(UpdateFriends)}: Total targets count: {allTargets.Count()}");
             DataCenter.PartyMembers = GetPartyMembers(allTargets);
-            DataCenter.AllianceMembers = allTargets?.Where(ObjectHelper.IsAlliance) ?? Enumerable.Empty<BattleChara>();
-
+          //DataCenter.AllianceMembers = allTargets?.Where(ObjectHelper.IsAlliance) ?? Enumerable.Empty<BattleChara>();
+            DataCenter.AllianceMembers = Enumerable.Empty<BattleChara>();
             var mayPet = allTargets.OfType<BattleNpc>().Where(npc => npc.OwnerId == Player.Object.ObjectId);
             DataCenter.HasPet = mayPet.Any(npc => npc.BattleNpcKind == BattleNpcSubKind.Pet);
             //DataCenter.HasPet = HasPet();
@@ -410,6 +410,9 @@ internal static partial class TargetUpdater
     private static IEnumerable<BattleChara> GetPartyMembers(IEnumerable<BattleChara> allTargets)
     {
         var party = Svc.Party.Select(p => p.GameObject).OfType<BattleChara>().Where(b => b.DistanceToPlayer() <= 30);
+
+
+
 
         if (!party.Any()) party = new BattleChara[] { Player.Object };
 

@@ -66,11 +66,13 @@ public static class ObjectHelper
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
+    [Obsolete]
     public static unsafe bool IsAlliance(this GameObject obj)
     {
         return obj != null
                && obj.ObjectId is not 0
                && obj.ObjectId != GameObject.InvalidGameObjectId
+               && obj.IsValid()
                && (ActionManager.CanUseActionOnTarget((uint)ActionID.Cure, obj.Struct())
                    || ActionManager.CanUseActionOnTarget((uint)ActionID.Raise1, obj.Struct()));
     }
