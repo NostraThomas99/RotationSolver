@@ -1436,11 +1436,6 @@ public enum StatusID : ushort
     /// <summary>
     /// 
     /// </summary>
-    Excogitation = 1220,
-
-    /// <summary>
-    /// 
-    /// </summary>
     Gobskin = 2114,
 
     /// <summary>
